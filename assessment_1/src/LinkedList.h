@@ -12,12 +12,32 @@
 		LinkedList();
 		
 		Node getHead();
-		Node setHead(Node back);
+		void setHead(Node back);
 
-    Node* get_head_ptr();
+    Node getTail();
+    void setTail(Node back);
+
+    Node* get_head_ptr();  //DELET THIS!!!
 
 		size_t list_length();
 
+    Node getCurrent();
+    void setCurrent(const Node&);
+    void removeCurrent();
+
+    Node removeFromHead();
+    Node removeFromTail();
+
+    bool removeFirstOccurance(const Node back);
+    bool removeAllOccurances(const Node back);
+
+    bool gotoPos(uint n);
+    bool gotoHead();
+    bool gotoTail();
+    bool forward();
+    bool back();
+
+//////////////////////////RENAME THESE!////////////////////////////////////
     void list_head_insert(const Node::value_type& entry);
     void list_tail_insert(const Node::value_type& entry);
     void list_insert(const Node::value_type& entry);
@@ -27,6 +47,7 @@
 
     void list_head_remove();
     void list_clear();
+///////////////////////////////////////////////////////////////////////////
 		
 		private:
 			Node* head_ptr;

@@ -33,26 +33,37 @@ DeckOfCards::DeckOfCards()
 
 void DeckOfCards::shuffle()
 {
-  // std::srand(std::time(nullptr));
+// -- To shuffle an array a of n elements (indices 0..n-1):
+// for i from n−1 downto 1 do
+//  j ← random integer such that 0 ≤ j ≤ i
+//  exchange a[j] and a[i]
 
- //    std::vector<int> elements { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+  int blah[10] = {0,1,2,3,4,5,6,7,8,9};
+  int n = (sizeof(blah)/sizeof(*blah));
 
- //    std::cout << "Before: ";
- //    std::copy(elements.cbegin(), elements.cend(),
- //        std::ostream_iterator<int>(std::cout, " "));
+  //linked_list->current_position();
+  //int n = linked_list->length();
 
- //    auto currentIndexCounter = elements.size();
+  if (linked_list->gotoHead())
+  {
+    for (int i = linked_list->list_length()-1; i>1; i--)
+    {
+      int j = (rand() % (int)(i + 1));
 
- //    for (auto iter = elements.rbegin(); iter != elements.rend();
- //        iter++, --currentIndexCounter)
- //    {
- //        int randomIndex = std::rand() % currentIndexCounter;
+      // //Perform a swap, TO-DO: TIDY UP THIS SECTION!!
+      // linked_list->gotoPos(j);
+      // Node::value_type old_j_val = linked_list->current_ptr.data();
 
- //        if (*iter != elements.at(randomIndex))
- //        {
- //            std::swap(elements.at(randomIndex), *iter);
- //        }
- //    }
+      // linked_list->gotoPos(i);
+      // Node::value_type old_i_val = linked_list->current_ptr.data();
+
+      // linked_list->gotoPos(j);
+      // linked_list->current_ptr.set_data(old_i_val);
+
+      // linked_list->gotoPos(i);
+      // linked_list->current_ptr.set_data(old_j_val);
+    }
+  }
 }
 
 int DeckOfCards::length()
@@ -79,9 +90,12 @@ std::string DeckOfCards::value() const
 {
   std::string output;
 
-  for (Node* current_ptr = linked_list->get_head_ptr(); current_ptr != NULL; current_ptr = current_ptr->get_next_link())
+  //If there is something stored in the head
+  if (linked_list->gotoHead())
   {
-    output += current_ptr->get_data() + " ";
+    do {
+      output += linked_list->getCurrent().data() + " ";
+    } while (linked_list->forward());
   }
 
   return output;

@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
-SOURCES=main.cpp Node.cpp LinkedList.cpp DeckOfCards.cpp
+SOURCES=DeckOfCardsDemo.cpp Node.cpp LinkedList.cpp DeckOfCards.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=test
 

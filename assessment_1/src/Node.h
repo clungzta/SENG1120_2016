@@ -20,12 +20,12 @@ public:
     void set_next_link(Node* new_link);
     void set_prev_link(Node* new_link);
 
-    value_type get_data() const;
-    Node* get_next_link() const;
-    Node* get_prev_link() const;
+    value_type data() const;
+    Node* next_link() const;
+    Node* prev_link() const;
 
 private:
-    value_type data;
+    value_type d;
     Node* prev;    
     Node* next;
 };
