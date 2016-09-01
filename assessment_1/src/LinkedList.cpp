@@ -10,6 +10,7 @@ LinkedList::LinkedList()
 {
   head_ptr = NULL;
   tail_ptr = NULL;
+  current_ptr = NULL;
 }
 
 size_t LinkedList::list_length()
@@ -30,6 +31,19 @@ void LinkedList::list_head_insert(const Node::value_type& entry)
   list_len++;
 }
 
+void LinkedList::list_tail_insert(const Node::value_type& entry)
+// Precondition: None
+// Postcondition: A new node storing the
+// supplied entry is created and linked in to be
+// the new tail of the linked list
+{
+  Node* entry_ptr = new Node(entry);
+  if (tail_ptr != NULL) tail_ptr->set_next_link(entry_ptr);
+  
+  tail_ptr = entry_ptr;
+  list_len++;
+}
+
 void LinkedList::list_insert(const Node::value_type& entry)
 // Precondition: current points to the node just before
 // the insertion position
@@ -37,8 +51,10 @@ void LinkedList::list_insert(const Node::value_type& entry)
 // inserted after the node pointed to by current;
 // current points to the new node
 {
-  if (head_ptr == NULL) {
-    //If there is nothing in the list yet
+  if (head_ptr == NULL)
+  {
+    //If there is nothing in the linked list
+    //Add the entry to the list head 
     list_head_insert(entry);
     current_ptr = head_ptr;
     tail_ptr = current_ptr->get_next_link();
@@ -47,28 +63,30 @@ void LinkedList::list_insert(const Node::value_type& entry)
   else
   {
     //Otherwise insert after node pointed to by current
-    cout << "ok else!" << endl; //Untested!
     Node* add_ptr = new Node();
     add_ptr->set_data(entry);
-    add_ptr->set_next_link(current_ptr->get_next_link()); //SEGFAULTS HERE! 
+    add_ptr->set_next_link(current_ptr->get_next_link());
     current_ptr->set_next_link(add_ptr);
     tail_ptr = current_ptr->get_next_link();
   }
 
-  cout << "ok3!" << endl;
-  
   list_len++;
 }
 
 Node LinkedList::setHead(Node new_head)
 {
   head_ptr = &new_head;
-  list_len++;
+  list_len; //= ?
 }
 
 Node LinkedList::getHead()
 {
   return *head_ptr;
+}
+
+Node* LinkedList::get_head_ptr()
+{
+  return head_ptr;
 }
 
 bool LinkedList::list_search(const Node::value_type& target)

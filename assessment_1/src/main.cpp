@@ -5,26 +5,28 @@ Semester 2 2016
 
 #include <iostream>
 #include <cstdlib>
-#include "Node.h"
-#include "LinkedList.h"
+#include "DeckOfCards.h"
 
 using namespace std;
 
 int main()
 {
+  DeckOfCards* deck = new DeckOfCards();
+  cout << deck->length() << endl;
+  cout << deck << endl;  
 
-  string hello = "hello";
+  // for (int i=0;i<100;i++)
+  // {
+  //  string str = std::to_string(l1->list_length());
+  //  l1->list_insert(str);
+  //  cout << str << " stored at: " << l1->list_length()-1 << endl;
+  // }
 
-  Node* n1 = new Node();
-  Node* n2 = new Node(hello, n1, NULL);
+  // cout << "done!" << endl;
 
-  LinkedList* l1 = new LinkedList();
+  // if (l1->list_search("69")) {cout << "found 69!!!" << endl;}
 
-  for (int i=0;i<100;i++)
-  {
-  	l1->list_insert("abc123");
-  	cout << l1->list_length() << endl;
-  }
+  // l1->list_clear();
 
-  cout << "zesty dek ov cardz" << endl;
+  //cout << "Zesty dek of cardz" << endl;
 }

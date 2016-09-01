@@ -23,20 +23,11 @@ public:
     value_type get_data() const;
     Node* get_next_link() const;
     Node* get_prev_link() const;
-    // const Node* get_next_link() const;
-    // const Node* get_prev_link() const;
-    Node* link();
-
-    value_type data;
-    Node* prev;
-    Node* next;
 
 private:
-    // These should be private, but it segfaults
-
-    // value_type data;
-    // Node* prev;    
-    // Node* next;
+    value_type data;
+    Node* prev;    
+    Node* next;
 };
 
 #endif
