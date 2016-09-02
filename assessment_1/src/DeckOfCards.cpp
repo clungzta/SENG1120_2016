@@ -47,27 +47,20 @@ DeckOfCards::DeckOfCards()
 
 void DeckOfCards::shuffle()
 {
+// Yates Shuffle Algorithm
 // -- To shuffle an array a of n elements (indices 0..n-1):
 // for i from n−1 downto 1 do
 //  j ← random integer such that 0 ≤ j ≤ i
 //  exchange a[j] and a[i]
 
-  //linked_list->gotoPos(linked_list->list_length()-1);
-  //std::cout << linked_list->getCurrent().data() << std::endl;
-
+  //Move the linked_list "cursor" to the head of the list
+  //Use if statement to avoid dereferencing a NULL ptr in an empty list
   if (linked_list->gotoHead())
   {
     for (int i = linked_list->list_length()-1; i>0; i--)
     {
-      int j = (rand() % (i+1));
-
-      //std::cout << i << " ";
-      //std::cout << "Everyday I'm shuffling!" << "     List Length: " << linked_list->list_length() << " i: "<< i << " j: " << j << std::endl;
-
-      //Perform a swap, TO-DO: TIDY UP THIS SECTION!!
-      
+      uint j = (rand() % (i+1));
       swap_cards(i, j);
-      //std::cout << value() << std::endl;
     }
   }
 }
@@ -101,7 +94,6 @@ void DeckOfCards::swap_cards(const uint a, const uint b)
     Node::value_type old_a_val = linked_list->getCurrent().data();
 
     //std::cout << "Before Swap:" << std::endl << "i: linked_list[" << a << "] = " << old_a_val << std::endl << "j: linked_list[" << b << "] = " << old_b_val << std::endl;
-
     linked_list->gotoPos(a);
     linked_list->updateCurrent(old_b_val);
 
