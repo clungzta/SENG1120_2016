@@ -45,7 +45,6 @@ int main(int argc, char* argv[]) {
   
   std::cout << deck->value() << std::endl;
   std::cout << deck << std::endl;
-  deck->shuffle();
 
   // for (int i=0;i<100;i++)
   // {

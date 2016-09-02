@@ -28,6 +28,11 @@ void LinkedList::setCurrent(const Node&)
 
 }
 
+void LinkedList::updateCurrent(const Node::value_type& entry)
+{
+  current_ptr->set_data(entry);
+}
+
 void LinkedList::removeCurrent()
 {
 
@@ -145,25 +150,12 @@ void LinkedList::list_insert(const Node::value_type& entry)
 // inserted after the node pointed to by current;
 // current points to the new node
 {
-  if (head_ptr == NULL)
-  {
-    //If there is nothing in the linked list
-    //Add the entry to the list head 
-    list_head_insert(entry);
-    current_ptr = head_ptr;
-    tail_ptr = current_ptr->next_link();
-  }
-
-  else
-  {
-    //Otherwise insert after node pointed to by current
-    Node* add_ptr = new Node();
-    add_ptr->set_data(entry);
-    add_ptr->set_next_link(current_ptr->next_link());
-    current_ptr->set_next_link(add_ptr);
-    tail_ptr = current_ptr->next_link();
-  }
-
+  Node* add_ptr = new Node;
+  add_ptr->set_data(entry);
+  add_ptr->set_next_link(current_ptr->next_link());
+  current_ptr->set_next_link(add_ptr);
+  if (current_ptr == tail_ptr) {tail_ptr = current_ptr->next_link();}
+  current_ptr = current_ptr->next_link();
   list_len++;
 }
 

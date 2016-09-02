@@ -22,6 +22,7 @@
 		size_t list_length();
 
     Node getCurrent();
+    void updateCurrent(const Node::value_type& entry);
     void setCurrent(const Node&);
     void removeCurrent();
 
@@ -37,7 +38,7 @@
     bool forward();
     bool back();
 
-//////////////////////////RENAME THESE!////////////////////////////////////
+//////////////////////////RENAME/REMOVE THESE!////////////////////////////////////
     void list_head_insert(const Node::value_type& entry);
     void list_tail_insert(const Node::value_type& entry);
     void list_insert(const Node::value_type& entry);

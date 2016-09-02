@@ -11,13 +11,15 @@ DeckOfCards::DeckOfCards()
 
   std::string card_name;
 
+  bool first_loop = true;
+
   // Generate the deck of cards
   for (int i=0; i<4; i++)
   {
     for (int j=2; j<15; j++)
     {
-      // std::cout << " " << std::endl;
-      // std::cout << i << ", " << j << std::endl;
+      //std::cout << " " << std::endl;
+      //std::cout << i << ", " << j << std::endl;
       if (j >10)
       {
         card_name = special_cards[j-11] + "-" + suits[i];
@@ -25,8 +27,20 @@ DeckOfCards::DeckOfCards()
       else
       {
         card_name = std::to_string(j) + "-" + suits[i];
-      }     
-      linked_list->list_insert(card_name);
+      }
+
+      if (first_loop) {
+        linked_list->list_head_insert(card_name);
+        first_loop = false;
+        linked_list->gotoHead();
+        std::cout << "Head inserted!" << std::endl;
+      }
+      else
+      {
+        linked_list->list_insert(card_name);
+      }
+      
+      //std::cout << card_name << std::endl;
     }
   }
 }
@@ -38,30 +52,44 @@ void DeckOfCards::shuffle()
 //  j ← random integer such that 0 ≤ j ≤ i
 //  exchange a[j] and a[i]
 
-  int blah[10] = {0,1,2,3,4,5,6,7,8,9};
-  int n = (sizeof(blah)/sizeof(*blah));
-
-  //linked_list->current_position();
-  //int n = linked_list->length();
+  //linked_list->gotoPos(linked_list->list_length()-1);
+  //std::cout << linked_list->getCurrent().data() << std::endl;
 
   if (linked_list->gotoHead())
   {
-    for (int i = linked_list->list_length()-1; i>1; i--)
+    for (int i = linked_list->list_length()-1; i>0; i--)
     {
-      int j = (rand() % (int)(i + 1));
+      int j = (rand() % (i+1));
 
-      // //Perform a swap, TO-DO: TIDY UP THIS SECTION!!
-      // linked_list->gotoPos(j);
-      // Node::value_type old_j_val = linked_list->current_ptr.data();
+      //std::cout << i << " ";
+      //std::cout << "Everyday I'm shuffling!" << "     List Length: " << linked_list->list_length() << " i: "<< i << " j: " << j << std::endl;
 
-      // linked_list->gotoPos(i);
-      // Node::value_type old_i_val = linked_list->current_ptr.data();
+      //Perform a swap, TO-DO: TIDY UP THIS SECTION!!
+      linked_list->gotoPos(j);
+      Node::value_type old_j_val = linked_list->getCurrent().data();
+      //std::cout << "Got old_j_val!: " << old_j_val << std::endl;
 
-      // linked_list->gotoPos(j);
-      // linked_list->current_ptr.set_data(old_i_val);
+      linked_list->gotoPos(i);
+      Node::value_type old_i_val = linked_list->getCurrent().data();
+      //std::cout << "Got old_i_val!: " << old_i_val << std::endl;
 
-      // linked_list->gotoPos(i);
-      // linked_list->current_ptr.set_data(old_j_val);
+      std::cout << "Before Swap:" << std::endl << "i: a[" << i << "] = " << old_i_val << std::endl << "j: a[" << j << "] = " << old_j_val << std::endl;
+
+      linked_list->gotoPos(j);
+      linked_list->updateCurrent(old_i_val);
+
+      linked_list->gotoPos(i);
+      linked_list->updateCurrent(old_j_val);
+
+      //FOR DEBUGGING/////////////////////////////////////////////////
+      linked_list->gotoPos(j);
+      Node::value_type new_j_val = linked_list->getCurrent().data();
+
+      linked_list->gotoPos(i);
+      Node::value_type new_i_val = linked_list->getCurrent().data();
+
+      std::cout << "After Swap:" << std::endl << "i: a[" << i << "] = " << new_i_val << std::endl << "j: a[" << j << "] = " << new_j_val << std::endl << std::endl;
+      ////////////////////////////////////////////////////////////////
     }
   }
 }
