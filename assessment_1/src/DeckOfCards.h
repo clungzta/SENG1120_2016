@@ -22,6 +22,7 @@ class DeckOfCards
     std::string value() const;
   
   private:
+    void swap_cards(const uint a, const uint b);
     LinkedList* linked_list;
 };
   
