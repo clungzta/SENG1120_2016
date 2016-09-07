@@ -10,33 +10,29 @@
 		public:
 
 		LinkedList();
+    ~LinkedList();
 		
 		Node getHead();
-		void setHead(Node back);
-
     Node getTail();
-    void setTail(Node back);
-
-    Node* get_head_ptr();  //DELET THIS!!!
 
 		size_t list_length();
 
     Node getCurrent();
-    void updateCurrent(const Node::value_type& entry);
-    void setCurrent(const Node&);
-    void removeCurrent();
-
-    Node removeFromHead();
-    Node removeFromTail();
-
-    bool removeFirstOccurance(const Node back);
-    bool removeAllOccurances(const Node back);
+    void setCurrent(const Node::value_type& entry);
+    
+    bool removeCurrent();
+    bool removeFromHead();
+    bool removeFromTail();
+    bool removeFirstOccurance(const Node::value_type& entry);
+    bool removeAllOccurances(const Node::value_type& entry);
 
     bool gotoPos(uint n);
     bool gotoHead();
     bool gotoTail();
     bool forward();
     bool back();
+
+    bool empty();
 
 //////////////////////////RENAME/REMOVE THESE!////////////////////////////////////
     void list_head_insert(const Node::value_type& entry);

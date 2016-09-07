@@ -11,6 +11,13 @@ LinkedList::LinkedList()
   head_ptr = NULL;
   tail_ptr = NULL;
   current_ptr = NULL;
+  list_len = 0;
+}
+
+//Destructor!!!!
+LinkedList::~LinkedList()
+{
+
 }
 
 size_t LinkedList::list_length()
@@ -23,39 +30,49 @@ Node LinkedList::getCurrent()
   return *current_ptr;
 }
 
-void LinkedList::setCurrent(const Node&)
-{
-
-}
-
-void LinkedList::updateCurrent(const Node::value_type& entry)
+void LinkedList::setCurrent(const Node::value_type& entry)
 {
   current_ptr->set_data(entry);
 }
 
-void LinkedList::removeCurrent()
+bool LinkedList::removeCurrent()
 {
+  if (current_ptr == NULL)
+  { 
+    return false; //Avoid dereferencing a NULL ptr
+  }
+  else if (current_ptr == head_ptr) 
+  { 
+    //Removing from head
+    head_ptr = current_ptr->next_link();
+    head_ptr->set_prev_link(NULL);
+  } 
+  else if (current_ptr == tail_ptr)
+  {
+    //Removing from tail
+    tail_ptr = current_ptr->prev_link();
+    tail_ptr->set_next_link(NULL);
+  }
+  else 
+  {
+    //Removing from somewhere in the middle of the list
+    current_ptr->prev_link()->set_next_link(current_ptr->next_link());
+    current_ptr->next_link()->set_prev_link(current_ptr->prev_link());
+  }
 
+  delete current_ptr; // Free the memory used by the current Node Object
+  list_len--;
+  return true;
 }
 
-Node LinkedList::removeFromHead()
+bool LinkedList::removeFromHead()
 {
-
+  return (gotoHead() && removeCurrent());
 }
 
-Node LinkedList::removeFromTail()
+bool LinkedList::removeFromTail()
 {
-
-}
-
-bool LinkedList::removeFirstOccurance(const Node back)
-{
- 
-}
-
-bool LinkedList::removeAllOccurances(const Node back)
-{
-
+  return (gotoTail() && removeCurrent());
 }
 
 bool LinkedList::gotoPos(uint n)
@@ -63,18 +80,12 @@ bool LinkedList::gotoPos(uint n)
 // Postcondition: 'current_ptr' points to the the node stored at the @nth position on the list
 // Function returns false if this pointer is NULL, otherwise returns true
 {
-  //If head is not null, go to head
-  if (gotoHead()) {
-    for (int i=0; i<n; i++)
-    {
-      current_ptr = current_ptr->next_link();
-    }
-    return true;
-  }
-
-  else {
-    return false;
-  }
+  //List length should = 51 for full deck
+  //Avoid out of bounds error
+  if (n > list_length()-1) {return false;}
+  gotoHead();
+  for (int i=0; i<n; i++) { forward(); }
+  return true;
 }
 
 bool LinkedList::gotoHead()
@@ -152,6 +163,7 @@ void LinkedList::list_insert(const Node::value_type& entry)
 {
   Node* add_ptr = new Node;
   add_ptr->set_data(entry);
+  add_ptr->set_prev_link(current_ptr);
   add_ptr->set_next_link(current_ptr->next_link());
   current_ptr->set_next_link(add_ptr);
   if (current_ptr == tail_ptr) {tail_ptr = current_ptr->next_link();}
@@ -159,20 +171,14 @@ void LinkedList::list_insert(const Node::value_type& entry)
   list_len++;
 }
 
-void LinkedList::setHead(Node new_head)
+bool LinkedList::empty()
 {
-  head_ptr = &new_head;
-  list_len; //= ?
+  return (list_length() > 0);
 }
 
 Node LinkedList::getHead()
 {
   return *head_ptr;
-}
-
-Node* LinkedList::get_head_ptr()
-{
-  return head_ptr;
 }
 
 bool LinkedList::list_search(const Node::value_type& target)
@@ -191,25 +197,11 @@ bool LinkedList::list_search(const Node::value_type& target)
   return false;
 }
 
-void LinkedList::list_head_remove()
-// Precondition: the list is not empty
-// Postcondition: The first Node is removed and
-// returned to the heap
-{
-  Node* temp_ptr;
-  temp_ptr = head_ptr;
-  head_ptr = head_ptr->next_link();
-  if (head_ptr != NULL) {head_ptr->set_next_link(NULL);}
-  else {tail_ptr = NULL;} // list is empty, update tail
-  delete temp_ptr; // Free the Node’s space
-  list_len--;
-}
-
 void LinkedList::list_clear()
 {
   // Precondition: None
   // Postcondition: the list is empty and
   // head_ptr and tail_prt are both NULL
-  while (head_ptr != NULL) list_head_remove();
+  while (head_ptr != NULL) removeFromHead();
   list_len = 0;
 }

@@ -2,14 +2,15 @@
 #define DECKOFCARDS_H
 
 #include <string>
-
 #include "LinkedList.h"
 
 class DeckOfCards
 {
   public:
-
+    //Constructor
     DeckOfCards();
+    //Destructor
+    ~DeckOfCards();
 
     bool empty();
     bool remove(std::string str);

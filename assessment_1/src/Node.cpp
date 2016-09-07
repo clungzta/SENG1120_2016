@@ -25,6 +25,11 @@ void Node::set_next_link(Node* new_link)
 	next = new_link;
 }
 
+void Node::set_prev_link(Node* new_link)
+{
+	prev = new_link;
+}
+
 Node::value_type Node::data() const
 {
 	return d;

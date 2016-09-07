@@ -18,31 +18,25 @@ DeckOfCards::DeckOfCards()
   {
     for (int j=2; j<15; j++)
     {
-      //std::cout << " " << std::endl;
-      //std::cout << i << ", " << j << std::endl;
-      if (j >10)
-      {
-        card_name = special_cards[j-11] + "-" + suits[i];
-      }
-      else
-      {
-        card_name = std::to_string(j) + "-" + suits[i];
-      }
+      card_name = (j > 10 ? special_cards[j-11] : std::to_string(j)) + "-" + suits[i];
 
       if (first_loop) {
         linked_list->list_head_insert(card_name);
         first_loop = false;
         linked_list->gotoHead();
-        std::cout << "Head inserted!" << std::endl;
       }
       else
       {
         linked_list->list_insert(card_name);
       }
-      
-      //std::cout << card_name << std::endl;
     }
   }
+}
+
+//Destructor!!!!
+DeckOfCards::~DeckOfCards()
+{
+  
 }
 
 void DeckOfCards::shuffle()
@@ -77,37 +71,39 @@ bool DeckOfCards::empty()
 
 int DeckOfCards::position(std::string str)
 {
-
+  for (int i=0; i < linked_list->list_length(); i++)
+  {
+    linked_list->gotoPos(i);
+    //If item is found in list, return its location
+    if (linked_list->getCurrent().data() == str) { return i; }
+  }
+  //Otherwise return -1
+  return -1;
 }
 
 bool DeckOfCards::remove(std::string str)
 {
+  int pos = position(str);
 
+  //std::cout << "removing " << str << " at position " << pos << std::endl;
+
+  linked_list->gotoPos(pos);
+  linked_list->removeCurrent();
 }
 
-void DeckOfCards::swap_cards(const uint a, const uint b)
+void DeckOfCards::swap_cards(const uint a_pos, const uint b_pos)
 {
-    linked_list->gotoPos(b);
+    linked_list->gotoPos(b_pos);
     Node::value_type old_b_val = linked_list->getCurrent().data();
 
-    linked_list->gotoPos(a);
+    linked_list->gotoPos(a_pos);
     Node::value_type old_a_val = linked_list->getCurrent().data();
 
-    //std::cout << "Before Swap:" << std::endl << "i: linked_list[" << a << "] = " << old_a_val << std::endl << "j: linked_list[" << b << "] = " << old_b_val << std::endl;
-    linked_list->gotoPos(a);
-    linked_list->updateCurrent(old_b_val);
+    linked_list->gotoPos(a_pos);
+    linked_list->setCurrent(old_b_val);
 
-    linked_list->gotoPos(b);
-    linked_list->updateCurrent(old_a_val);
-
-    //FOR DEBUGGING/////////////////////////////////////////////////
-    linked_list->gotoPos(a);
-    Node::value_type new_a_val = linked_list->getCurrent().data();
-
-    linked_list->gotoPos(b);
-    Node::value_type new_b_val = linked_list->getCurrent().data();
-    //std::cout << "After Swap:" << std::endl << "i: linked_list[" << a << "] = " << new_a_val << std::endl << "j: linked_list[" << b << "] = " << new_b_val << std::endl << std::endl;
-    ////////////////////////////////////////////////////////////////
+    linked_list->gotoPos(b_pos);
+    linked_list->setCurrent(old_a_val);
 }
       
 std::string DeckOfCards::value() const
@@ -127,5 +123,6 @@ std::string DeckOfCards::value() const
 
 std::ostream& operator<<(std::ostream& out, const DeckOfCards& deck)
 {
- std::cout << deck.value() << std::endl;
+ out << deck.value();
+ return out;
 }
