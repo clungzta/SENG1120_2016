@@ -1,5 +1,7 @@
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <sstream>
 #include "DeckOfCards.h"
 
 DeckOfCards::DeckOfCards()
