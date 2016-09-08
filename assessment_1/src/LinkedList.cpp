@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Constructor Function
+// Constructor
 LinkedList::LinkedList()
 {
   head_ptr = NULL;
@@ -14,10 +14,11 @@ LinkedList::LinkedList()
   list_len = 0;
 }
 
-//Destructor!!!!
+// Destructor
 LinkedList::~LinkedList()
 {
-
+  goto_head();
+  while (remove());
 }
 
 size_t LinkedList::list_length()
@@ -25,17 +26,17 @@ size_t LinkedList::list_length()
   return list_len;
 }
 
-Node LinkedList::getCurrent()
+Node LinkedList::get_current()
 {
   return *current_ptr;
 }
 
-void LinkedList::setCurrent(const Node::value_type& entry)
+void LinkedList::set_current(const Node::value_type& entry)
 {
   current_ptr->set_data(entry);
 }
 
-bool LinkedList::removeCurrent()
+bool LinkedList::remove()
 {
   if (current_ptr == NULL)
   { 
@@ -60,114 +61,84 @@ bool LinkedList::removeCurrent()
     current_ptr->next_link()->set_prev_link(current_ptr->prev_link());
   }
 
+  Node* temp_ptr = current_ptr->next_link();
+
   delete current_ptr; // Free the memory used by the current Node Object
+  current_ptr = temp_ptr; // Move the current pointer to the next item in the list
   list_len--;
   return true;
 }
 
-bool LinkedList::removeFromHead()
-{
-  return (gotoHead() && removeCurrent());
-}
-
-bool LinkedList::removeFromTail()
-{
-  return (gotoTail() && removeCurrent());
-}
-
-bool LinkedList::gotoPos(uint n)
-// Precondition: None
-// Postcondition: 'current_ptr' points to the the node stored at the @nth position on the list
-// Function returns false if this pointer is NULL, otherwise returns true
+bool LinkedList::goto_pos(const uint n)
 {
   //List length should = 51 for full deck
   //Avoid out of bounds error
   if (n > list_length()-1) {return false;}
-  gotoHead();
+
+  goto_head();
+
   for (int i=0; i<n; i++) { forward(); }
   return true;
 }
 
-bool LinkedList::gotoHead()
-// Precondition: None
-// Postcondition: 'current_ptr' points to the head of the list.
-// Function returns false if head pointer is NULL, otherwise returns true
+bool LinkedList::goto_head()
 {
   if (head_ptr != NULL) { current_ptr = head_ptr; return true; }
   else { return false; }
 }
 
-bool LinkedList::gotoTail()
-// Precondition: None
-// Postcondition: 'current_ptr' points to the tail of the list.
-// Function returns false if tail pointer is NULL, otherwise returns true
+bool LinkedList::goto_tail()
 {
   if (tail_ptr != NULL) { current_ptr = tail_ptr; return true; }
   else { return false; }
 }
 
 bool LinkedList::forward()
-// Precondition: None
-// Postcondition: 'current_ptr' points to the successive item in the list.
-// Function returns false if next_link pointer is NULL, otherwise returns true
 {
-  Node* next_link = current_ptr->next_link();
-
-  if (next_link != NULL) { current_ptr = next_link; return true; }
-  else { return false; }
+  if (current_ptr->next_link() != NULL)
+  {
+    current_ptr = current_ptr->next_link();
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
 bool LinkedList::back()
-// Precondition: None
-// Postcondition: 'current_ptr' points to the preceding item in the list.
-// Function returns false if prev_link pointer is NULL, otherwise returns true
 {
-  Node* prev_link = current_ptr->prev_link();
-
-  if (prev_link != NULL) { current_ptr = prev_link; return true; }
-  else { return false; }
-}
-
-void LinkedList::list_head_insert(const Node::value_type& entry)
-// Precondition: None
-// Postcondition: A new node storing the
-// supplied entry is created and linked in to be
-// the new head of the linked list
-{
-  head_ptr = new Node(entry);
-  // The following is required if a tail pointer is
-  // used. It deals with adding to an empty list
-  if (tail_ptr == NULL) tail_ptr = head_ptr;
-  list_len++;
-}
-
-void LinkedList::list_tail_insert(const Node::value_type& entry)
-// Precondition: None
-// Postcondition: A new node storing the
-// supplied entry is created and linked in to be
-// the new tail of the linked list
-{
-  Node* entry_ptr = new Node(entry);
-  if (tail_ptr != NULL) tail_ptr->set_next_link(entry_ptr);
-  
-  tail_ptr = entry_ptr;
-  list_len++;
+  if (current_ptr->prev_link() != NULL)
+  {
+    current_ptr = current_ptr->prev_link();
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
 void LinkedList::list_insert(const Node::value_type& entry)
-// Precondition: current points to the node just before
-// the insertion position
-// Postcondition: A new node is containing entry is
-// inserted after the node pointed to by current;
-// current points to the new node
 {
   Node* add_ptr = new Node;
+
   add_ptr->set_data(entry);
-  add_ptr->set_prev_link(current_ptr);
-  add_ptr->set_next_link(current_ptr->next_link());
-  current_ptr->set_next_link(add_ptr);
-  if (current_ptr == tail_ptr) {tail_ptr = current_ptr->next_link();}
-  current_ptr = current_ptr->next_link();
+
+  if (head_ptr == NULL)
+  {
+    head_ptr = add_ptr;
+  }
+  else
+  {
+    add_ptr->set_prev_link(current_ptr);
+    add_ptr->set_next_link(current_ptr->next_link());
+    current_ptr->set_next_link(add_ptr);
+  }
+
+  if (current_ptr == tail_ptr) { tail_ptr = add_ptr; }
+
+  current_ptr = add_ptr;
   list_len++;
 }
 
@@ -176,18 +147,7 @@ bool LinkedList::empty()
   return (list_length() > 0);
 }
 
-Node LinkedList::getHead()
-{
-  return *head_ptr;
-}
-
 bool LinkedList::list_search(const Node::value_type& target)
-// Preconditions: None
-// Postconditions: Current points to the
-// first node storing the target, and true is
-// returned.
-// If not present, current is NULL and false is returned.
-// Uses cstdlib
 {
   for (current_ptr = head_ptr; current_ptr != NULL; current_ptr = current_ptr->next_link())
   {
@@ -199,9 +159,10 @@ bool LinkedList::list_search(const Node::value_type& target)
 
 void LinkedList::list_clear()
 {
-  // Precondition: None
-  // Postcondition: the list is empty and
-  // head_ptr and tail_prt are both NULL
-  while (head_ptr != NULL) removeFromHead();
+  while (head_ptr != NULL)
+  {
+    goto_head();
+    remove();
+  }
   list_len = 0;
 }

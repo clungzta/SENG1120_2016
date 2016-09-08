@@ -15,6 +15,12 @@ Node::Node(const value_type& initial_data /*=value_type()*/, Node* initial_prev_
 	next = initial_next_link;
 }
 
+Node::~Node()
+{
+	next = NULL;
+	prev = NULL;
+}
+
 void Node::set_data(const value_type& new_data)
 {
 	d = new_data;

@@ -11,41 +11,69 @@
 
 		LinkedList();
     ~LinkedList();
-		
-		Node getHead();
-    Node getTail();
 
 		size_t list_length();
 
-    Node getCurrent();
-    void setCurrent(const Node::value_type& entry);
+    Node get_current();
+    void set_current(const Node::value_type& entry);
     
-    bool removeCurrent();
-    bool removeFromHead();
-    bool removeFromTail();
-    bool removeFirstOccurance(const Node::value_type& entry);
-    bool removeAllOccurances(const Node::value_type& entry);
+    bool remove();
+    bool remove_item(const Node::value_type& entry);
 
-    bool gotoPos(uint n);
-    bool gotoHead();
-    bool gotoTail();
+    // Precondition: None
+    // Postcondition: 'current_ptr' points to the the node
+    // stored at the n'th position on the list when traversing from head to tail
+    // @param n The position on the list to traverse to
+    // Function returns false if this pointer is NULL, otherwise returns true
+    bool goto_pos(const uint n);
+
+    // Precondition: None
+    // Postcondition: 'current_ptr' points to the head of the list.
+    // Function returns false if head pointer is NULL, otherwise returns true
+    bool goto_head();
+
+    // Precondition: None
+    // Postcondition: 'current_ptr' points to the tail of the list.
+    // Function returns false if tail pointer is NULL, otherwise returns true
+    bool goto_tail();
+
+    // Precondition: None
+    // Postcondition: 'current_ptr' points to the next item in the list.
+    // Function returns false if the new value assigned to 'current_ptr' is NULL, otherwise returns true
     bool forward();
+    
+    // Precondition: None
+    // Postcondition: 'current_ptr' points to the previous item in the list.
+    // Function returns false if the new value assigned to 'current_ptr' is NULL, otherwise returns true
     bool back();
 
+    // Precondition: None
+    // Postcondition:
+    // Boolean returns true if list is Empty
     bool empty();
 
-//////////////////////////RENAME/REMOVE THESE!////////////////////////////////////
-    void list_head_insert(const Node::value_type& entry);
-    void list_tail_insert(const Node::value_type& entry);
+    // Precondition: current points to the node just before
+    // the insertion position.
+    // Postcondition: A new node is containing entry is
+    // inserted after the node pointed to by current;
+    // current points to the new node
     void list_insert(const Node::value_type& entry);
 
-    bool list_search(const Node::value_type& target);
-    bool list_remove(const Node::value_type& target);
 
-    void list_head_remove();
+    // Preconditions: None
+    // Postconditions: Current points to the
+    // first node storing the target, and true is
+    // returned.
+    // If not present, current is NULL and false is returned.
+    // Uses cstdlib
+    bool list_search(const Node::value_type& target);
+
+    // Precondition: None
+    // Postcondition: the list is empty and
+    // head_ptr and tail_prt are both NULL
     void list_clear();
-///////////////////////////////////////////////////////////////////////////
 		
+
 		private:
 			Node* head_ptr;
 			Node* tail_ptr;

@@ -16,6 +16,9 @@ class DeckOfCards
     bool remove(std::string str);
 
     int length();
+
+    // Preconditions: None
+    // Postconditions: 
     int position(std::string str);
 
     void shuffle();

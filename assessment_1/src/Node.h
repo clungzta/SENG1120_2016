@@ -16,6 +16,9 @@ public:
     //Constructor
     Node(const value_type& initial_data = value_type(), Node* initial_prev_link = NULL, Node* initial_next_link = NULL);
 
+    //Destructor
+    ~Node();
+
     void set_data(const value_type& new_data);
     void set_next_link(Node* new_link);
     void set_prev_link(Node* new_link);
