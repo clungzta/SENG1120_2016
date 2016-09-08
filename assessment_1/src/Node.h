@@ -1,36 +1,61 @@
-/*
-Assignment 1 - Created by Alex McClung for SENG1120
+/**
+
+SENG1120 Assignment 1
+Created by Alex McClung
 Semester 2 2016
-*/
+
+**/
 
 #ifndef Node_H
 #define Node_H
 
 #include <string>
 
-class Node
+namespace alex_m
 {
-public:
-    typedef std::string value_type;
+    class Node //For a doubly linked list
+    {
+    public:
+        typedef std::string value_type;
 
-    //Constructor
-    Node(const value_type& initial_data = value_type(), Node* initial_prev_link = NULL, Node* initial_next_link = NULL);
+        // Constructor
+        // Precondition: None
+        // Postcondition: A new node instance is created
+        // @initial_data: Initial data to be stored in the node
+        // @initial_prev_link: Initial pointer to the previous node in the list
+        // @initial_next_link: Initial pointer to the next node in the list
+        Node(const value_type& initial_data = value_type(), Node* initial_prev_link = NULL, Node* initial_next_link = NULL);
 
-    //Destructor
-    ~Node();
+        // Destructor
+        // Precondition: None
+        // Postcondition: The node instance is deleted
+        ~Node();
 
-    void set_data(const value_type& new_data);
-    void set_next_link(Node* new_link);
-    void set_prev_link(Node* new_link);
+        // Precondition: None
+        // Postcondition: The data stored within the node is set to @param new_data
+        void set_data(const value_type& new_data);
 
-    value_type data() const;
-    Node* next_link() const;
-    Node* prev_link() const;
+        // Precondition: None
+        // Postcondition: The next_link pointer is set to @param new_link
+        void set_next_link(Node* new_link);
 
-private:
-    value_type d;
-    Node* prev;    
-    Node* next;
-};
+        // Precondition: None
+        // Postcondition: The prev_link pointer is set to @param new_link
+        void set_prev_link(Node* new_link);
 
+        //Data stored in the node
+        value_type data() const;
+
+        //Points to the next node in the list
+        Node* next_link() const;
+
+        //Points to the previous node in the list
+        Node* prev_link() const;
+
+    private:
+        value_type d;
+        Node* prev;    
+        Node* next;
+    };
+}
 #endif

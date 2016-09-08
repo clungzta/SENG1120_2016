@@ -1,24 +1,35 @@
+/**
+
+SENG1120 Assignment 1
+Created by Alex McClung
+Semester 2 2016
+
+**/
+
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
 #include "Node.h"
 #include <string>
 
-
+namespace alex_m
+{
 	class LinkedList
 	{
 		public:
 
 		LinkedList();
+
     ~LinkedList();
 
-		size_t list_length();
+		size_t list_length() const;
 
-    Node get_current();
+    Node get_current() const;
+
+
     void set_current(const Node::value_type& entry);
     
     bool remove();
-    bool remove_item(const Node::value_type& entry);
 
     // Precondition: None
     // Postcondition: 'current_ptr' points to the the node
@@ -48,9 +59,8 @@
     bool back();
 
     // Precondition: None
-    // Postcondition:
-    // Boolean returns true if list is Empty
-    bool empty();
+    // Postcondition: Boolean returns true if list is Empty
+    bool empty() const;
 
     // Precondition: current points to the node just before
     // the insertion position.
@@ -58,7 +68,6 @@
     // inserted after the node pointed to by current;
     // current points to the new node
     void list_insert(const Node::value_type& entry);
-
 
     // Preconditions: None
     // Postconditions: Current points to the
@@ -80,6 +89,6 @@
 			Node* current_ptr;
       size_t list_len;
 	};
-	
+}	
 	
 #endif

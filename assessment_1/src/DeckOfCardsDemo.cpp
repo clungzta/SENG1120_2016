@@ -1,14 +1,24 @@
+/**
+
+SENG1120 Assignment 1
+Created by Alex McClung
+Semester 2 2016
+
+**/
+
 #include <iostream> // for cout and endl
 #include <cstdlib>  // for srand, rand and atoi
 #include <ctime>    // for time
 #include "DeckOfCards.h"
 
 using namespace std;
+using namespace alex_m;
 
 int main(int argc, char* argv[]) {
 
-  //Initialise the random number generator by inputing a seed as an argument 
+        
     if (argc >= 2) {
+        //Initialise the random number generator by inputing a seed value as an argument 
         int seed = atoi(argv[1]);
         srand(seed);
     }
@@ -27,8 +37,8 @@ int main(int argc, char* argv[]) {
   //Step 3: Shuffle the deck of cards using shuffle()
   deck->shuffle();
   
-  //Step 4: Print the deck of cards again using cout <<
-  cout << deck << endl;
+  //Step 4: Print the deck of cards again using overloaded cout << operator
+  cout << *deck << endl;
 
   //Step 5: Print the position of cards “4-H”, “10-S”, “Q-C” and “A-D”, separated by a
   //single blank space.
@@ -45,8 +55,6 @@ int main(int argc, char* argv[]) {
   deck->remove("10-S");
 
   //Step 8: Print the position of cards “4-H”, “10-S”, “Q-C” and “A-D” again
-  std::cout << deck->value() << std::endl;
-
   cout << deck->position("4-H") << " ";
   cout << deck->position("10-S") << " ";
   cout << deck->position("Q-C") << " ";
@@ -54,4 +62,7 @@ int main(int argc, char* argv[]) {
   
   //Step 9: Print the total number of cards in DeckOfCards using length()
   std::cout << deck->length() << std::endl;
+
+  //Clear the memory used on the heap by the deck of cards
+  delete deck;
 }
