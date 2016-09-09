@@ -12,6 +12,7 @@ Semester 2 2016
 
 namespace alex_m
 {
+	//Constructor has default arguments, these are specified in the header definition
 	Node::Node(const value_type& initial_data /*=value_type()*/, Node* initial_prev_link /*=NULL*/, Node* initial_next_link /*=NULL*/)
 	{
 		d = initial_data;

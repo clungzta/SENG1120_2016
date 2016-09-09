@@ -21,9 +21,9 @@ namespace alex_m
         // Constructor
         // Precondition: None
         // Postcondition: A new node instance is created
-        // @initial_data: Initial data to be stored in the node
-        // @initial_prev_link: Initial pointer to the previous node in the list
-        // @initial_next_link: Initial pointer to the next node in the list
+        // @initial_data: Initial data to be stored in the node. Default Empty value_type
+        // @initial_prev_link: Initial pointer to the previous node in the list. Default NULL
+        // @initial_next_link: Initial pointer to the next node in the list. Default NULL
         Node(const value_type& initial_data = value_type(), Node* initial_prev_link = NULL, Node* initial_next_link = NULL);
 
         // Destructor

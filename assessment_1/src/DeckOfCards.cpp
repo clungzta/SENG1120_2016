@@ -29,6 +29,7 @@ namespace alex_m
       {
         std::stringstream ss;
         ss << j;
+        //Combine the card name and suit
         card_name = (j > 10 ? special_cards[j-11] : ss.str()) + "-" + suits[i];
         list->list_insert(card_name);
       }
@@ -53,9 +54,12 @@ namespace alex_m
     //Use if statement to avoid dereferencing a NULL ptr in an empty list
     if (list->goto_head())
     {
+      // for i from n−1 downto 1 do
       for (int i = list->list_length()-1; i>0; i--)
       {
+        //  j ← random integer such that 0 ≤ j ≤ i
         uint j = (rand() % (i+1));
+        // exchange a[j] and a[i]
         swap_cards(i, j);
       }
     }
@@ -77,7 +81,7 @@ namespace alex_m
     {
       list->goto_pos(i);
       //If item is found in list, return its location
-      if (list->get_current().data() == str) { return i; }
+      if (list->get_current() == str) { return i; }
     }
     //Otherwise return -1
     return -1;
@@ -87,22 +91,28 @@ namespace alex_m
   {
     int pos = position(str);
 
-    list->goto_pos(pos);
-    list->remove();
+    if (pos > -1){ //If the card is in the list: remove it
+      list->goto_pos(pos);
+      list->remove();
+    }
     return true;
   }
 
   void DeckOfCards::swap_cards(const uint a_pos, const uint b_pos)
   {
+      //Get the data at position b
       list->goto_pos(b_pos);
-      Node::value_type old_b_val = list->get_current().data();
+      Node::value_type old_b_val = list->get_current();
 
+      //Get the data at position a
       list->goto_pos(a_pos);
-      Node::value_type old_a_val = list->get_current().data();
+      Node::value_type old_a_val = list->get_current();
 
+      //Give a the old b value
       list->goto_pos(a_pos);
       list->set_current(old_b_val);
 
+      //Give b the old a value
       list->goto_pos(b_pos);
       list->set_current(old_a_val);
   }
@@ -115,13 +125,16 @@ namespace alex_m
     if (list->goto_head())
     {
       do {
-        output += list->get_current().data() + " ";
+        //Iterate through the entire deck
+        //Append each card name to output string, separated by a space
+        output += list->get_current() + " ";
       } while (list->forward());
     }
 
     return output;
   }
 
+  //Override the cout operator
   std::ostream& operator<<(std::ostream& out, const DeckOfCards& deck)
   {
    out << deck.value();

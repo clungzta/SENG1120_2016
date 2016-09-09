@@ -18,6 +18,7 @@ namespace alex_m
   // Constructor
   LinkedList::LinkedList()
   {
+    //Initialise member variables
     head_ptr = NULL;
     tail_ptr = NULL;
     current_ptr = NULL;
@@ -27,6 +28,7 @@ namespace alex_m
   // Destructor
   LinkedList::~LinkedList()
   {
+    //Clear the entire list
     list_clear();
   }
 
@@ -35,13 +37,15 @@ namespace alex_m
     return list_len;
   }
 
-  Node LinkedList::get_current() const
+  Node::value_type LinkedList::get_current() const
   {
-    return *current_ptr;
+    //Derefrerence and return the current ptr
+    return current_ptr->data();
   }
 
   void LinkedList::set_current(const Node::value_type& entry)
   {
+    //Set the value of the current ptr
     current_ptr->set_data(entry);
   }
 
@@ -53,13 +57,13 @@ namespace alex_m
     }
     else if (current_ptr == head_ptr) 
     { 
-      //Removing from head
+      //Removing from the head of the list
       head_ptr = current_ptr->next_link();
       if (head_ptr != NULL) { head_ptr->set_prev_link(NULL); }
     } 
     else if (current_ptr == tail_ptr)
     {
-      //Removing from tail
+      //Removing from the tail of the list
       tail_ptr = current_ptr->prev_link();
       tail_ptr->set_next_link(NULL);
     }
@@ -80,30 +84,33 @@ namespace alex_m
 
   bool LinkedList::goto_pos(const uint n)
   {
-    //List length should = 51 for full deck
     //Avoid out of bounds error
     if (n > list_length()-1) {return false;}
 
     goto_head();
 
+    //Traverse the list from head to tail param @n times
     for (uint i=0; i<n; i++) { forward(); }
     return true;
   }
 
   bool LinkedList::goto_head()
   {
+    //Set the current ptr to the head of the list
     if (head_ptr != NULL) { current_ptr = head_ptr; return true; }
     else { return false; }
   }
 
   bool LinkedList::goto_tail()
   {
+    //Set the current ptr to the tail of the list
     if (tail_ptr != NULL) { current_ptr = tail_ptr; return true; }
     else { return false; }
   }
 
   bool LinkedList::forward()
   {
+    //If the next link isn't NULL, move current_ptr "forward" (head to tail) by one link
     if (current_ptr->next_link() != NULL)
     {
       current_ptr = current_ptr->next_link();
@@ -111,12 +118,13 @@ namespace alex_m
     }
     else
     {
-      return false;
+      return false; //Next link is null, return false
     }
   }
 
   bool LinkedList::back()
   {
+    //If the previous link isn't NULL, move current_ptr "back" by one link
     if (current_ptr->prev_link() != NULL)
     {
       current_ptr = current_ptr->prev_link();
@@ -124,7 +132,7 @@ namespace alex_m
     }
     else
     {
-      return false;
+      return false; //Previous link is null, return false
     }
   }
 
@@ -134,15 +142,18 @@ namespace alex_m
 
     if (head_ptr == NULL)
     {
+      //Nothing at the head, so insert at the head of the list
       head_ptr = add_ptr;
     }
     else
     {
+      //Otherwise insert just after current_ptr
       add_ptr->set_prev_link(current_ptr);
       add_ptr->set_next_link(current_ptr->next_link());
       current_ptr->set_next_link(add_ptr);
     }
 
+    //Update the tail_ptr if necessary
     if (current_ptr == tail_ptr) { tail_ptr = add_ptr; }
 
     current_ptr = add_ptr;
@@ -151,11 +162,13 @@ namespace alex_m
 
   bool LinkedList::empty() const
   {
+    //Returns true if the list is empty
     return (list_length() > 0);
   }
 
   bool LinkedList::list_search(const Node::value_type& target)
   {
+    //Searches the list for a node containing data param @target
     for (current_ptr = head_ptr; current_ptr != NULL; current_ptr = current_ptr->next_link())
     {
       if (target == current_ptr->data()) return true;
@@ -166,7 +179,7 @@ namespace alex_m
 
   void LinkedList::list_clear()
   {
-    //Delete all nodes in the list by iterating through
+    //Delete all nodes in the list by traversing the entire list
     while (head_ptr != NULL)
     {
       goto_head();
