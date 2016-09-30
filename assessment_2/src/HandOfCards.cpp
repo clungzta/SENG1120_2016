@@ -67,15 +67,15 @@ namespace alex_m
   // use string value() in its implementation.
   void HandOfCards::faceUp()
   {
-    //If there is something stored in the head
+    //If there is something stored in the head (avoids dereferencing NULL ptr)
     if (list->goto_head())
     {
+      //Iterate through the entire deck, setting all cards face up
       do {
-        //Iterate through the entire deck
-        if (!list->get_current().is_face_up()){
-          list->get_current().flip();
-        }
-
+        //TO-DO: FIX THIS!, shouldnt need to copy twice to flip a card!
+        Card temp = list->get_current();
+        temp.set_face_up();
+        list->set_current(temp);
       } while (list->forward());
     }
   }
@@ -85,7 +85,8 @@ namespace alex_m
   // down (false).
   void HandOfCards::add(Card back, bool face_up) //TO-DO: Fix Face up/down!
   {
-    if (face_up != back.is_face_up()) { back.flip(); }
+    if (face_up) { back.set_face_up(); }
+    else { back.set_face_down(); }
     list->list_insert(back);
   }
 
@@ -107,7 +108,6 @@ namespace alex_m
         {
           output += "?-? ";
         }
-        // std::cout << list->get_current().get_face() << endl;
       } while (list->forward());
     }
     return output;

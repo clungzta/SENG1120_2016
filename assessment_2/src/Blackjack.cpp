@@ -15,31 +15,11 @@ Semester 2 2016
 using namespace std;
 using namespace alex_m;
 
-void check_winners(HandOfCards* dealer, HandOfCards* player1)
-{
-  //Step 5: Check if the player or the dealer have a count of 21
-  if (player1->count() == 21 && dealer->countAll() != 21)
-  {
-    cout << "The player is the winner!" << endl;
-    return;
-  }
-  else if (player1->count() != 21 && dealer->countAll() == 21)
-  {
-    cout << "The dealer is the winner!" << endl;
-    return;
-  }
-  else if (player1->count() == 21 && dealer->countAll() == 21)
-  {
-    cout << "Tie! There are no winners." << endl;
-    return;
-  }
-}
-
 void display_output(HandOfCards* dealer, HandOfCards* player1)
 {
   //Step 4: Display each hand’s content - for player and the dealer
-  cout << "Player: " << *player1 << "(" << player1->count() << " points)"  << player1->countAll() << endl;
-  cout << "Dealer: " << *dealer << "(" << dealer->count() << " points)" << dealer->countAll() << endl;
+  cout << "Player: " << *player1 << "(" << player1->count() << " points)" << endl;
+  cout << "Dealer: " << *dealer << "(" << dealer->count() << " points)" << endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -87,8 +67,25 @@ int main(int argc, char* argv[]) {
   //Step 4
   display_output(dealer, player1);
 
-  //Step 5
-  check_winners(dealer, player1);
+  //Step 5: Check if the player or the dealer have a count of 21
+  if (player1->count() == 21 && dealer->countAll() != 21)
+  {
+    cout << "The player is the winner!" << endl;
+    delete deck, player1, dealer; //Clear the memory used on the heap
+    return 0;
+  }
+  else if ((player1->count() != 21 && dealer->countAll() == 21) || player1->count() > 21)
+  {
+    cout << "The dealer is the winner!" << endl;
+    delete deck, player1, dealer; //Clear the memory used on the heap
+    return 0;
+  }
+  else if (player1->count() == 21 && dealer->countAll() == 21)
+  {
+    cout << "Tie! There are no winners." << endl;
+    delete deck, player1, dealer; //Clear the memory used on the heap
+    return 0;
+  }
 
   //Step 6: If that is not the case, then loop through the player while it has a hand <21 
   while (player1->count() < 21) {
@@ -102,7 +99,26 @@ int main(int argc, char* argv[]) {
       player1->add(deck->pop(), true);
       //Return to steps 4 & 5
       display_output(dealer, player1);
-      check_winners(dealer, player1);
+      
+      //Step 5: Check if the player or the dealer have a count of 21
+      if (player1->count() == 21 && dealer->countAll() != 21)
+      {
+        cout << "The player is the winner!" << endl;
+        delete deck, player1, dealer; //Clear the memory used on the heap
+        return 0;
+      }
+      else if ((player1->count() != 21 && dealer->countAll() == 21) || player1->count() > 21)
+      {
+        cout << "The dealer is the winner!" << endl;
+        delete deck, player1, dealer; //Clear the memory used on the heap
+        return 0;
+      }
+      else if (player1->count() == 21 && dealer->countAll() == 21)
+      {
+        cout << "Tie! There are no winners." << endl;
+        delete deck, player1, dealer; //Clear the memory used on the heap
+        return 0;
+      }
     }
     else if (input == 2)
     {
@@ -111,15 +127,14 @@ int main(int argc, char* argv[]) {
       {
         dealer->add(deck->pop(), true);
       }
-        display_output(dealer, player1);
+      break;
     }
   }
 
-  dealer->faceUp();
-
   //Step 8: Make all cards in the dealer’s hand face-up, and display the contents of both
   //hands using the overloaded cout << operator
-  cout << *dealer << endl;
+  dealer->faceUp();
+  cout << "Dealer: " << *dealer << endl;
 
   //Step 9: Count the contents of each hand and display them in the format, e.g.: "(P=21) (D=19)"
   cout << "(P=" << player1->count() << ")(D=" << dealer->count() << ")" << endl;
@@ -127,8 +142,19 @@ int main(int argc, char* argv[]) {
   //Step 10: Check who has the highest count among the two hands (but not over 21), and
   // print “The player/dealer is the winner.” and exit. If both got exactly 21, then print
   // “Tie! There are no winners.” 
-  check_winners(dealer, player1);
-
-  //Clear the memory used on the heap by the hands and deck of cards
-  delete deck, player1, dealer;
+  if (player1->count() > dealer->count())
+  {
+    cout << "The player is the winner!" << endl;    
+  }
+  else if (player1->count() == dealer->count())
+  {
+    cout << "Tie! There are no winners" << endl;    
+  }
+  else
+  {
+    cout << "The dealer is the winner!" << endl;    
+  }
+  
+  delete deck, player1, dealer; //Clear the memory used on the heap
+  return 0;
 }

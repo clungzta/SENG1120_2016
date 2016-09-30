@@ -33,32 +33,29 @@ namespace alex_m
       // This frees the memory used by the list from the heap.
       ~HandOfCards();
 
-      // counts the value of the hand stored in the list (but only the
-      // cards facing up). Each card 2-10 have their face value. J, Q and K are worth
-      // 10 points each. A is worth 11 points (this is a simplification of the
-      // traditional Blackjack rules).
+      // Precondition: None
+      // Postcondition: counts then returns the value of the hand (but only the
+      // cards facing up). Counts according to blackjack rules.
       int count();
 
-      // counts the value of the hand stored in the list (all cards
-      // facing both up and down).
-      // string value() returns a string displaying the sequence of cards
-      // stored in HandOfCards. Face-down cards must be displayed with “?-?”
-      // symbol.
+
+      // Precondition: None
+      // Postcondition: returns the value of the hand (counts all cards
+      // facing both up and down). Counts according to blackjack rules.
       int countAll();
       
-      // makes all cards face-up.
-      // Overloaded output operator (i.e. ‘<<’) outputs the content of the
-      // HandOfCards in a form suitable for printing. Hint: This method should
-      // use string value() in its implementation.
+      // Precondition: None
+      // Postcondition: All cards in the hand are face up.
       void faceUp();
 
-      // takes a single Card and a boolean
-      // arguments and adds the card in HandOfCards, either facing-up (true) or
-      // down (false).
+      // Precondition: None
+      // Postcondition: A new card is added to the hand.
+      // param @back is the card
+      // param @face_up sets whether the card is to face up or down in the hand
       void add(Card back, bool face_up);
 
       // Precondition: None
-      // Postcondition: A string is returned displaying the sequence of cards in the deck
+      // Postcondition: A string is returned displaying the sequence of cards in the hand
       std::string value() const;
     
     private:

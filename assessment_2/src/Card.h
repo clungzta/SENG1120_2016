@@ -19,13 +19,11 @@ namespace alex_m
         // Constructor
         // Precondition: None
         // Postcondition: A new Card instance is created
-        // @initial_data: Initial data to be stored in the Card. Default Empty Object
-        // @initial_prev_link: Initial pointer to the previous Card in the list. Default NULL
-        // @initial_next_link: Initial pointer to the next Card in the list. Default NULL
-            //const Object& initial_data = Object(), Node* initial_prev_link = NULL, Node* initial_next_link = NULL
-        Card(const std::string& initial_face = std::string(), const int& initial_value = 0, const bool& initially_face_up = NULL);
-
-        //Card();
+        // @initial_face: Initial face of the Card. Default: Empty String
+        // @initial_value: Initial integer value of the card. Default Empty String
+        // @initially_face_up: Is the card initially face up? Default False
+        //const Object& initial_data = Object(), Node* initial_prev_link = NULL, Node* initial_next_link = NULL
+        Card(const std::string& initial_face = std::string(), const int& initial_value = 0, const bool& initially_face_up = false);
 
         // Destructor
         // Precondition: None
@@ -40,15 +38,25 @@ namespace alex_m
         // Postcondition: The data stored within the Card is set to @param new_data
         void set_value(const int new_value);
 
+        // Precondition: None
+        // Postcondition: The integer value of the card is returned
         int get_value() const;
 
+        // Precondition: None
+        // Postcondition: The string value of the card is returned
         std::string get_face() const;
 
+        // Precondtion: None
+        // Postcondition: A boolean is returned: true if the card is face up, otherwise false
         bool is_face_up() const;
 
         // Precondition: None
-        // Postcondition: The next_link pointer is set to @param new_link
-        bool flip();
+        // Postcondition: Card is set to face up
+        void set_face_up();
+
+        // Precondition: None
+        // Postcondition: Card is set to face down
+        void set_face_down();
 
     private:
         std::string face;

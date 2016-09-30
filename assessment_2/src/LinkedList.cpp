@@ -158,8 +158,6 @@ namespace alex_m
 
     current_ptr = add_ptr;
     list_len++;
-
-    cout << "inserted" << (*)add_ptr << endl;
   }
 
   bool LinkedList::empty() const
