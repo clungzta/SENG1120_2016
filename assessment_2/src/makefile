@@ -3,7 +3,7 @@ CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
 SOURCES=Blackjack.cpp Card.cpp DeckOfCards.cpp HandOfCards.cpp Node.h LinkedList.h
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=DeckOfCardsDemo
+EXECUTABLE=Blackjack
 
 all: $(SOURCES) $(EXECUTABLE)
 	

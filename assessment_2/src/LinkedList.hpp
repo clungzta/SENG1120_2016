@@ -92,7 +92,7 @@ namespace alex_m
   bool LinkedList<Object>::goto_pos(const int n)
   {
     //Avoid out of bounds error
-    if (n > list_length()-1) {return false;}
+    if (n > int(list_length())-1) {return false;}
 
     goto_head();
 

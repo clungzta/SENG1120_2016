@@ -71,19 +71,25 @@ int main(int argc, char* argv[]) {
   if (player1->count() == 21 && dealer->countAll() != 21)
   {
     cout << "The player is the winner!" << endl;
-    delete deck, player1, dealer; //Clear the memory used on the heap
+    delete deck;
+    delete player1;
+    delete dealer; //Clear the memory used on the heap
     return 0;
   }
   else if ((player1->count() != 21 && dealer->countAll() == 21) || player1->count() > 21)
   {
     cout << "The dealer is the winner!" << endl;
-    delete deck, player1, dealer; //Clear the memory used on the heap
+    delete deck;
+    delete player1;
+    delete dealer; //Clear the memory used on the heap
     return 0;
   }
   else if (player1->count() == 21 && dealer->countAll() == 21)
   {
     cout << "Tie! There are no winners." << endl;
-    delete deck, player1, dealer; //Clear the memory used on the heap
+    delete deck;
+    delete player1;
+    delete dealer; //Clear the memory used on the heap
     return 0;
   }
 
@@ -104,19 +110,25 @@ int main(int argc, char* argv[]) {
       if (player1->count() == 21 && dealer->countAll() != 21)
       {
         cout << "The player is the winner!" << endl;
-        delete deck, player1, dealer; //Clear the memory used on the heap
+        delete deck;
+        delete player1;
+        delete dealer; //Clear the memory used on the heap
         return 0;
       }
       else if ((player1->count() != 21 && dealer->countAll() == 21) || player1->count() > 21)
       {
         cout << "The dealer is the winner!" << endl;
-        delete deck, player1, dealer; //Clear the memory used on the heap
+        delete deck;
+        delete player1;
+        delete dealer; //Clear the memory used on the heap
         return 0;
       }
       else if (player1->count() == 21 && dealer->countAll() == 21)
       {
         cout << "Tie! There are no winners." << endl;
-        delete deck, player1, dealer; //Clear the memory used on the heap
+        delete deck;
+        delete player1;
+        delete dealer; //Clear the memory used on the heap
         return 0;
       }
     }
@@ -155,6 +167,8 @@ int main(int argc, char* argv[]) {
     cout << "The dealer is the winner!" << endl;    
   }
   
-  delete deck, player1, dealer; //Clear the memory used on the heap
+  delete deck;
+  delete player1;
+  delete dealer; //Clear the memory used on the heap
   return 0;
 }
