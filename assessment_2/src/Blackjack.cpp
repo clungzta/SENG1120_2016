@@ -45,24 +45,28 @@ int main(int argc, char* argv[]) {
   HandOfCards* dealer = new HandOfCards();
 
   //Step 3: Looping through the player and the dealer, give them one card each, facing up.
-  //Then, give one card to player 1, facing up. Then, give one card to the dealer, facing down.
-  for (int i=0;i<3;i++)
+  for (int i=0;i<2;i++)
   {
-    bool face_up = (i<1); //Is this card going to be face up or face down?
     Card card = deck->pop(); //Pop a card from the top of the deck
 
     //Is this card going to the dealer or player (use modulo with two, to alternate with whether i is odd or even)
     if (i%2 == 0)
     {
       //Give Player the card from the top of the deck
-      player1->add(card, face_up);
+      player1->add(card, true);
     }
     else
     {
       //Give Dealer a card from the top of the deck
-      dealer->add(card, face_up);
+      dealer->add(card, true);
     }
   }
+
+  //Then, give one card to player 1, facing up.
+  player1->add(deck->pop(), true);
+
+  //Then, give one card to the dealer, facing down.
+  dealer->add(deck->pop(), false);
 
   //Step 4
   display_output(dealer, player1);
@@ -93,11 +97,17 @@ int main(int argc, char* argv[]) {
     return 0;
   }
 
-  //Step 6: If that is not the case, then loop through the player while it has a hand <21 
+  //Step 6: If that is not the case, then loop through the player while it has a hand <21
   while (player1->count() < 21) {
-    int input;
     cout << "Player, do you want to Hit (1) or Stand (2)?" << endl;
+
+    // Accept cin input
+    int input;
     cin >> input;
+
+    // Prevent input of invalid characters, which will break the program (cause an infinite loop)
+    // Just ignore any invalid (non integer) input
+    if(cin.fail()) { cin.clear(); cin.ignore(); }
 
     //If the answer is 1, then give the player another card from the deck, face-up, and go back to step (4).
     if (input == 1)
@@ -143,15 +153,13 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  //Step 8: Make all cards in the dealer’s hand face-up, and display the contents of both
-  //hands using the overloaded cout << operator
+  //Step 8: Make all cards in the dealer’s hand face-up, and display the contents of both hands using
+  //the overloaded cout << operator, along with the count for each hand.
   dealer->faceUp();
-  cout << "Dealer: " << *dealer << endl;
+  cout << "Player: " << *player1 << "(" << player1->count() << " points)" << endl;
+  cout << "Dealer: " << *dealer << "(" << dealer->count() << " points)" << endl;
 
-  //Step 9: Count the contents of each hand and display them in the format, e.g.: "(P=21) (D=19)"
-  cout << "(P=" << player1->count() << ")(D=" << dealer->count() << ")" << endl;
-
-  //Step 10: Check who has the highest count among the two hands (but not over 21), and
+  //Step 9: Check who has the highest count among the two hands (but not over 21), and
   // print “The player/dealer is the winner.” and exit. If both got exactly 21, then print
   // “Tie! There are no winners.” 
   if (player1->count() > dealer->count())
