@@ -52,6 +52,9 @@ namespace alex_m
         push(new_card);
       }
     }
+    //Shuffle in DeckOfCards constructor
+    //As per assignment specifications
+    shuffle();
   }
 
   //Destructor

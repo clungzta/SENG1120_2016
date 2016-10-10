@@ -60,5 +60,5 @@ namespace alex_m
         Node* next;
     };
 }
-#include "Node.hpp"
+#include "Node.template"
 #endif

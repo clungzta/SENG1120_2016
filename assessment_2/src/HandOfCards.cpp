@@ -30,7 +30,7 @@ namespace alex_m
   // string value() returns a string displaying the sequence of cards
   // stored in HandOfCards. Face-down cards must be displayed with “?-?”
   // symbol.
-  int HandOfCards::countAll()
+  int HandOfCards::countAll() const
   {
     int count = 0;
     if (list->goto_head())
@@ -47,7 +47,7 @@ namespace alex_m
   // cards facing up). Each card 2-10 have their face value. J, Q and K are worth
   // 10 points each. A is worth 11 points (this is a simplification of the
   // traditional Blackjack rules).
-  int HandOfCards::count()
+  int HandOfCards::count() const
   {
     int count = 0;
     if (list->goto_head())

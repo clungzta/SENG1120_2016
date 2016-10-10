@@ -61,28 +61,30 @@ int main(int argc, char* argv[]) {
     dealer.add(deck.pop(), false);
 
     //Step 4: Display each hand’s content - for player and the dealer
-    cout << "Player: " << player1 << "(" << player1.count() << " points)" << endl;
-    cout << "Dealer: " << dealer << "(" << dealer.count() << " points)" << endl;
+    step_4:
+      cout << "Player: " << player1 << "(" << player1.count() << " points)" << endl;
+      cout << "Dealer: " << dealer << "(" << dealer.count() << " points)" << endl;
 
-    //Step 5: Check if the player or the dealer have a count of 21
-    if (player1.count() == 21 && dealer.countAll() != 21)
-    {
-      cout << "The player is the winner!" << endl;
-      return 0;
-    }
-    else if ((player1.count() != 21 && dealer.countAll() == 21) || player1.count() > 21)
-    {
-      cout << "The dealer is the winner!" << endl;
-      return 0;
-    }
-    else if (player1.count() == 21 && dealer.countAll() == 21)
-    {
-      cout << "Tie! There are no winners." << endl;
-      return 0;
-    }
+      //Step 5: Check if the player or the dealer have a count of 21
+      if (player1.count() == 21 && dealer.countAll() == 21)
+      {
+        cout << "Tie! There are no winners." << endl;
+        return 0;
+      }
+      else if (player1.count() == 21)
+      {
+        cout << "The player is the winner!" << endl;
+        return 0;
+      }
+      else if (dealer.countAll() == 21 || player1.count() > 21)
+      {
+        cout << "The dealer is the winner!" << endl;
+        return 0;
+      }
 
-    //Step 6: If that is not the case, then loop through the player while it has a hand <21
-    while (player1.count() < 21) {
+      //Step 6: Ask “Player, do you want to Hit (1) or Stand (2)?” If the answer is 1, then give the
+      // player another card from the deck, face-up, and go back to step (4). If the answer is 2,
+      // continue to step (7). 
       cout << "Player, do you want to Hit (1) or Stand (2)?" << endl;
 
       // Accept cin input
@@ -98,67 +100,45 @@ int main(int argc, char* argv[]) {
       {
         player1.add(deck.pop(), true);
 
-        // Repeat Step 4: Display each hand’s content - for player and the dealer
-        cout << "Player: " << player1 << "(" << player1.count() << " points)" << endl;
-        cout << "Dealer: " << dealer << "(" << dealer.count() << " points)" << endl;
-        
-        // Repeat Step 5: Check if the player or the dealer have a count of 21
-        if (player1.count() == 21 && dealer.countAll() != 21)
-        {
-          cout << "The player is the winner!" << endl;
-          return 0;
-        }
-        else if ((player1.count() != 21 && dealer.countAll() == 21) || player1.count() > 21)
-        {
-          cout << "The dealer is the winner!" << endl;
-          return 0;
-        }
-        else if (player1.count() == 21 && dealer.countAll() == 21)
-        {
-          cout << "Tie! There are no winners." << endl;
-          return 0;
-        }
+        // Go back to Step 4: Display each hand’s content - for player and the dealer
+        goto step_4;
       }
+
       else if (input == 2)
       {
         //Step 7: Player is Stood, time to do the dealers play
-        while (dealer.countAll() < 17)
-        {
-          dealer.add(deck.pop(), true);
-        }
-        break;
+        while (dealer.countAll() < 17) { dealer.add(deck.pop(), true); }
       }
-    }
 
-    //Step 8: Make all cards in the dealer’s hand face-up, and display the contents of both hands using
-    //the overloaded cout << operator, along with the count for each hand.
-    dealer.faceUp();
-    cout << "Player: " << player1 << "(" << player1.count() << " points)" << endl;
-    cout << "Dealer: " << dealer << "(" << dealer.count() << " points)" << endl;
+      //Step 8: Make all cards in the dealer’s hand face-up, and display the contents of both hands using
+      //the overloaded cout << operator, along with the count for each hand.
+      dealer.faceUp();
+      cout << "Player: " << player1 << "(" << player1.count() << " points)" << endl;
+      cout << "Dealer: " << dealer << "(" << dealer.count() << " points)" << endl;
 
-    //Step 9: Check who has the highest count among the two hands (but not over 21), and
-    // print “The player/dealer is the winner.” and exit. If both got exactly 21, then print
-    // “Tie! There are no winners.” 
-    if (player1.count() > 21)
-    {
-      cout << "The dealer is the winner!" << endl;
-    }
-    else if (dealer.count() > 21)
-    {
-      cout << "The player is the winner!" << endl;
-    }
-    else if (player1.count() > dealer.count())
-    {
-      cout << "The player is the winner!" << endl;    
-    }
-    else if (player1.count() == dealer.count())
-    {
-      cout << "Tie! There are no winners" << endl;    
-    }
-    else if (dealer.count() > player1.count())
-    {
-      cout << "The dealer is the winner!" << endl;    
-    }
-    
-    return 0;
+      //Step 9: Check who has the highest count among the two hands (but not over 21), and
+      // print “The player/dealer is the winner.” and exit. If both got exactly 21, then print
+      // “Tie! There are no winners.” 
+      if (player1.count() > 21)
+      {
+        cout << "The dealer is the winner!" << endl;
+      }
+      else if (dealer.count() > 21)
+      {
+        cout << "The player is the winner!" << endl;
+      }
+      else if (player1.count() > dealer.count())
+      {
+        cout << "The player is the winner!" << endl;    
+      }
+      else if (player1.count() == dealer.count())
+      {
+        cout << "Tie! There are no winners" << endl;    
+      }
+      else if (dealer.count() > player1.count())
+      {
+        cout << "The dealer is the winner!" << endl;    
+      }
+      
+      return 0;
 }

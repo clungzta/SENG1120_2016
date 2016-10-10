@@ -112,5 +112,5 @@ namespace alex_m
         size_t list_len;
 	};
 }	
-#include "LinkedList.hpp"
+#include "LinkedList.template"
 #endif

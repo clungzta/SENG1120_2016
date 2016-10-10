@@ -36,13 +36,12 @@ namespace alex_m
       // Precondition: None
       // Postcondition: counts then returns the value of the hand (but only the
       // cards facing up). Counts according to blackjack rules.
-      int count();
-
+      int count() const;
 
       // Precondition: None
       // Postcondition: returns the value of the hand (counts all cards
       // facing both up and down). Counts according to blackjack rules.
-      int countAll();
+      int countAll() const;
       
       // Precondition: None
       // Postcondition: All cards in the hand are face up.
