@@ -1,0 +1,290 @@
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401AEF: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x404042: alex_m::HandOfCards::value[abi:cxx11]() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x40410B: alex_m::operator<<(std::ostream&, alex_m::HandOfCards const&) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401B15: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5valueB5cxx11Ev
+   fun:_ZN6alex_mlsERSoRKNS_11HandOfCardsE
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401B55: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x404042: alex_m::HandOfCards::value[abi:cxx11]() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x40410B: alex_m::operator<<(std::ostream&, alex_m::HandOfCards const&) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401B7B: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5valueB5cxx11Ev
+   fun:_ZN6alex_mlsERSoRKNS_11HandOfCardsE
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401BBB: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401C19: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403CAD: alex_m::HandOfCards::countAll() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401C2D: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards8countAllEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401C41: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401C8B: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401CE9: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401DA9: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x404042: alex_m::HandOfCards::value[abi:cxx11]() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x40410B: alex_m::operator<<(std::ostream&, alex_m::HandOfCards const&) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401DCF: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5valueB5cxx11Ev
+   fun:_ZN6alex_mlsERSoRKNS_11HandOfCardsE
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401E0F: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x404042: alex_m::HandOfCards::value[abi:cxx11]() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x40410B: alex_m::operator<<(std::ostream&, alex_m::HandOfCards const&) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401E35: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5valueB5cxx11Ev
+   fun:_ZN6alex_mlsERSoRKNS_11HandOfCardsE
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401E75: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401ED3: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403CAD: alex_m::HandOfCards::countAll() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401EE7: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards8countAllEv
+   fun:main
+}
+==17328== Conditional jump or move depends on uninitialised value(s)
+==17328==    at 0x4039A6: alex_m::LinkedList<alex_m::Card>::forward() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403D97: alex_m::HandOfCards::count() const (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401EFB: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_ZN6alex_m10LinkedListINS_4CardEE7forwardEv
+   fun:_ZNK6alex_m11HandOfCards5countEv
+   fun:main
+}
+==17328== 56 bytes in 1 blocks are definitely lost in loss record 1 of 4
+==17328==    at 0x4C2E0EF: operator new(unsigned long) (vg_replace_malloc.c:333)
+==17328==    by 0x40355C: alex_m::LinkedList<alex_m::Card>::list_insert(alex_m::Card const&) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x402D06: alex_m::DeckOfCards::push(alex_m::Card) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x402A17: alex_m::DeckOfCards::DeckOfCards() (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x40194D: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:_ZN6alex_m10LinkedListINS_4CardEE11list_insertERKS1_
+   fun:_ZN6alex_m11DeckOfCards4pushENS_4CardE
+   fun:_ZN6alex_m11DeckOfCardsC1Ev
+   fun:main
+}
+==17328== 56 bytes in 1 blocks are definitely lost in loss record 2 of 4
+==17328==    at 0x4C2E0EF: operator new(unsigned long) (vg_replace_malloc.c:333)
+==17328==    by 0x40355C: alex_m::LinkedList<alex_m::Card>::list_insert(alex_m::Card const&) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403EFA: alex_m::HandOfCards::add(alex_m::Card, bool) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401AD1: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:_ZN6alex_m10LinkedListINS_4CardEE11list_insertERKS1_
+   fun:_ZN6alex_m11HandOfCards3addENS_4CardEb
+   fun:main
+}
+==17328== 56 bytes in 1 blocks are definitely lost in loss record 3 of 4
+==17328==    at 0x4C2E0EF: operator new(unsigned long) (vg_replace_malloc.c:333)
+==17328==    by 0x40355C: alex_m::LinkedList<alex_m::Card>::list_insert(alex_m::Card const&) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x403EFA: alex_m::HandOfCards::add(alex_m::Card, bool) (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328==    by 0x401D8E: main (in /home/alex/SENG1120_2016/assessment_2/src/Blackjack)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:_ZN6alex_m10LinkedListINS_4CardEE11list_insertERKS1_
+   fun:_ZN6alex_m11HandOfCards3addENS_4CardEb
+   fun:main
+}
+==17328== 72,704 bytes in 1 blocks are still reachable in loss record 4 of 4
+==17328==    at 0x4C2DB8F: malloc (vg_replace_malloc.c:299)
+==17328==    by 0x4EC3EFF: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21)
+==17328==    by 0x40104E9: call_init.part.0 (dl-init.c:72)
+==17328==    by 0x40105FA: call_init (dl-init.c:30)
+==17328==    by 0x40105FA: _dl_init (dl-init.c:120)
+==17328==    by 0x4000CF9: ??? (in /lib/x86_64-linux-gnu/ld-2.23.so)
+==17328== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   obj:/lib/x86_64-linux-gnu/ld-2.23.so
+}
