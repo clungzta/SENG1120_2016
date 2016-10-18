@@ -1,0 +1,140 @@
+/**
+
+SENG1120 Assignment 1
+Created by Alex McClung
+Semester 2 2016
+
+**/
+
+#include "BTNode.h"
+#include "BTree.h"
+#include <string>
+#include <iostream>
+
+using namespace std;
+namespace alex_m
+{
+
+  // Constructor
+  template <typename Object>
+  BTree<Object>::BTree()
+  {
+    //Initialise member variables
+    root = NULL;
+  }
+
+  // Destructor
+  template <typename Object>
+  BTree<Object>::~BTree()
+  {
+    //Clear the entire tree
+    tree_clear();
+  }
+
+  template <typename Object>
+  size_t BTree<Object>::tree_count() const
+  {
+    return size;
+  }
+
+  template <typename Object>
+  Object BTree<Object>::get_current() const
+  {
+    //Derefrerence and return the current ptr
+    return current_ptr->data();
+  }
+
+  template <typename Object>
+  void BTree<Object>::set_current(const Object& entry)
+  {
+    //Set the value of the current ptr
+    current_ptr->set_data(entry);
+  }
+
+  template <typename Object>
+  bool BTree<Object>::remove()
+  {
+    
+  }
+
+  template <typename Object>
+  bool BTree<Object>::goto_root()
+  {
+    //Set the current ptr to the root of the tree
+    if (root != NULL) { current_ptr = root; return true; }
+    else { return false; }
+  }
+
+  template <typename Object>
+  bool BTree<Object>::goto_left()
+  {
+
+  }
+
+  template <typename Object>
+  bool BTree<Object>::goto_right()
+  {
+
+  }
+
+  template <typename Object>
+  bool BTree<Object>::goto_parent()
+  {
+
+  }
+
+  template <typename Object>
+  void BTree<Object>::tree_insert(const Object& entry)
+  {
+    if (empty()) root = *entry;
+    else add (root, entry);
+    size++;
+  }
+
+  template <typename Object>
+  bool BTree<Object>::empty() const
+  {
+    //Returns true if the tree is empty (nothing stored in the root node)
+    return (root == NULL);
+  }
+
+  template <typename Object>
+  bool BTree<Object>::tree_search(const Object& target)
+  {
+    //Searches the tree for a node containing data param @target
+
+  }
+
+  template <typename Object>
+  void BTree<Object>::tree_clear()
+  {
+    //Delete all nodes in the tree by traversing the entire tree
+
+  }
+
+  template <typename Object>
+  void add (BTNode<Object> node, Object it)
+  {
+    // int relation = it.compareTo(node.value);
+    // if (relation == 0)
+    // // Replace existing Object
+    // node.value = it;
+    // else if (relation > 0)
+    // // Work on right side
+    // if (node.right == NULL)
+    // node.right = new BTNode (it);
+    // else
+    // {
+    //   add (node.right, it);
+    // }
+    // else if (node.left == NULL)
+    // {
+    //   // Work on left side
+    //   node.left = new BTNode (it);
+    // }
+    // else
+    // {
+    //   add (node.left, it);
+    // }
+  }
+}
