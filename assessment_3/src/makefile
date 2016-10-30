@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
-SOURCES=StudentResults.cpp BTree.h Student.h BTNode.h
+SOURCES=StudentResults.cpp ClassroomOfStudents.cpp Student.cpp ClassroomOfStudents.h Student.h BTree.h BTNode.h
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=StudentResults
 

@@ -38,12 +38,21 @@ namespace alex_m
     bool empty() const;
     bool tree_search(const Object& target);
     void tree_clear();
+    std::string inOrder();
+    std::string inOrder(BTNode<Object>* node);
+    float average();
 
 	private:
     // Private member varibles
     BTNode<Object>* root;
     BTNode<Object>* current_ptr;
-    void add(BTNode<Object> node, Object it); // Helper function
+
+    float average(BTNode<Object>* node);
+    int average_counter;
+    float average_sum;
+    std::string printed;
+
+    void add(BTNode<Object>* node, Object it); // Helper function
     size_t size;
 	};
 }	

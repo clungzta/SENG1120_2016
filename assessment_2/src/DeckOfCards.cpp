@@ -124,7 +124,7 @@ namespace alex_m
     return -1;
   }
 
-  bool DeckOfCards::remove(std::string str)
+  bool DeckOfCards::remove(std::string str) const
   {
     int pos = position(str);
 

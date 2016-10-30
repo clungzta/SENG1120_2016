@@ -61,33 +61,74 @@ namespace alex_m
   bool BTree<Object>::goto_root()
   {
     //Set the current ptr to the root of the tree
-    if (root != NULL) { current_ptr = root; return true; }
-    else { return false; }
+    if (root != NULL) { 
+      current_ptr = root;
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   template <typename Object>
   bool BTree<Object>::goto_left()
   {
+    if (!empty())
+    {
+        if (current_ptr->left() != NULL)
+        {
+          current_ptr = current_ptr->left();
+          return true;
+        }
+    }
 
+    return false;
   }
 
   template <typename Object>
   bool BTree<Object>::goto_right()
   {
+    if (current_ptr != NULL)
+    {
+        if (current_ptr->right() != NULL)
+        {
+          current_ptr = current_ptr->right();
+          return true;
+        }
+    }
 
+    return false;
   }
 
   template <typename Object>
   bool BTree<Object>::goto_parent()
   {
+    if (current_ptr != NULL)
+    {
+        if (current_ptr->parent() != NULL)
+        {
+          current_ptr = current_ptr->parent();
+          return true;
+        }
+    }
 
+    return false;
   }
 
   template <typename Object>
   void BTree<Object>::tree_insert(const Object& entry)
   {
-    if (empty()) root = *entry;
-    else add (root, entry);
+    if (empty())
+    {
+      root = new BTNode<Object>(entry);
+      current_ptr = root;
+    }
+
+    else
+    {
+      add(root, entry);
+    }
+
     size++;
   }
 
@@ -112,29 +153,106 @@ namespace alex_m
 
   }
 
+  // template <typename Object>
+  // float BTree<Object>::search(float target)
+  // {
+  //   return find(root, target);
+  // }
+
+  // template <typename Object>
+  // float BTree<Object>::find(BTNode<Object>* node, float target)
+  // {
+  //   if (node == NULL)
+  //   {
+  //     return NULL;
+  //   }
+  //   else
+  //   {
+  //     int relation = node->get_grade() < target;
+  //     if (relation == 0) { return node.value; }
+  //     else if (relation > 0) { return find(node.right, target); }
+  //     else { return find(node.left, target); }
+  //   }
+  // }
+
   template <typename Object>
-  void add (BTNode<Object> node, Object it)
+  std::string BTree<Object>::inOrder()
   {
-    // int relation = it.compareTo(node.value);
-    // if (relation == 0)
-    // // Replace existing Object
-    // node.value = it;
-    // else if (relation > 0)
-    // // Work on right side
-    // if (node.right == NULL)
-    // node.right = new BTNode (it);
-    // else
-    // {
-    //   add (node.right, it);
-    // }
-    // else if (node.left == NULL)
-    // {
-    //   // Work on left side
-    //   node.left = new BTNode (it);
-    // }
-    // else
-    // {
-    //   add (node.left, it);
-    // }
+    return inOrder(root);
+  }
+
+  template <typename Object>
+  std::string BTree<Object>::inOrder(BTNode<Object>* node)
+  {
+    if (node != NULL)
+    {
+      inOrder(node->left());
+      printed = printed + node->data() + " ";
+      inOrder(node->right());
+    }
+
+    return printed;
+  }
+
+  template <typename Object>
+  float BTree<Object>::average()
+  {
+    average_sum = 0;
+    return average(root);
+  }
+
+  template <typename Object>
+  float BTree<Object>::average(BTNode<Object>* node)
+  {
+
+    if (node != NULL)
+    {
+      average_counter++;
+      inOrder(node->left());
+      average_sum = average_sum + node->data();
+      inOrder(node->right());
+    }
+
+    std::cout << average_sum << " " << average_counter << endl;
+    
+    return average_sum / tree_count();
+  }
+
+  template <typename Object>
+  void BTree<Object>::add(BTNode<Object>* node, Object it)
+  {
+    int relation = it.compare_to(node->data());
+
+    if (relation == 0)
+    {
+      // Replace existing Object
+      node->set_data(it);
+    }
+
+    else if (relation > 0)
+    {
+      // Work on right side
+      if (node->right() == NULL)
+      {
+        node->set_right(new BTNode<Object>(it));
+      }
+      else
+      {
+        add(node->right(), it);
+      }
+    }
+
+    else if (node->left() == NULL)
+    {
+      // Work on left side
+      node->set_left(new BTNode<Object>(it));
+    }
+
+    else
+    {
+      add(node->left(), it);
+    }
+
+    current_ptr = node;
   }
 }

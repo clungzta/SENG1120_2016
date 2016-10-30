@@ -6,64 +6,63 @@ Semester 2 2016
 
 **/
 
-#ifndef Card_H
-#define Card_H
+#ifndef Student_H
+#define Student_H
 
 #include <string>
 
 namespace alex_m
 {
-    class Card
+    class Student
     {
     public:
         // Constructor
         // Precondition: None
-        // Postcondition: A new Card instance is created
-        // @initial_face: Initial face of the Card. Default: Empty String
-        // @initial_value: Initial integer value of the card. Default Empty String
-        // @initially_face_up: Is the card initially face up? Default False
+        // Postcondition: A new Student instance is created
+        // @initial_name: Initial name of the Student. Default: Empty String
+        // @initial_grade: Initial floateger grade of the card. Default Empty String
+        // @initially_name_up: Is the card initially name up? Default False
         //const Object& initial_data = Object(), BTNode* initial_prev_link = NULL, BTNode* initial_next_link = NULL
-        Card(const std::string& initial_face = std::string(), const int& initial_value = 0, const bool& initially_face_up = false);
+        Student();
+        // Student(const std::string& student_name, const float& student_grade);
+        // Student(const std::string& student_name = std::string(), const float& student_grade = 0);
 
         // Destructor
         // Precondition: None
-        // Postcondition: The Card instance is deleted
-        ~Card();
+        // Postcondition: The Student instance is deleted
+        ~Student();
 
         // Precondition: None
-        // Postcondition: The data stored within the Card is set to @param new_data
-        void set_face(const std::string new_face);
+        // Postcondition: The data stored within the Student is set to @param new_data
+        void set_name(const std::string new_name);
 
         // Precondition: None
-        // Postcondition: The data stored within the Card is set to @param new_data
-        void set_value(const int new_value);
+        // Postcondition: The data stored within the Student is set to @param new_data
+        void set_grade(const float new_grade);
 
         // Precondition: None
-        // Postcondition: The integer value of the card is returned
-        int get_value() const;
+        // Postcondition: The floateger grade of the card is returned
+        float get_grade() const;
+
+        int compare_to(const Student& another_student);
 
         // Precondition: None
-        // Postcondition: The string value of the card is returned
-        std::string get_face() const;
-
-        // Precondtion: None
-        // Postcondition: A boolean is returned: true if the card is face up, otherwise false
-        bool is_face_up() const;
-
-        // Precondition: None
-        // Postcondition: Card is set to face up
-        void set_face_up();
-
-        // Precondition: None
-        // Postcondition: Card is set to face down
-        void set_face_down();
+        // Postcondition: The string grade of the card is returned
+        std::string get_name() const;
 
     private:
-        std::string face;
-        int value;
-        bool face_up;
+        std::string name;
+        float grade;
     };
-   //Overloading the cout operator for a Card
-  std::ostream& operator<<(std::ostream& out, const Card& card);
+   //Overloading the cout operator for a Student
+  std::ostream& operator << (std::ostream& out, const Student& student);
+  std::string operator + (const std::string& other, const Student& student);
+  float operator + (const float& other, const Student& student);
+  bool operator < (const Student& student1, const Student& student2);
+  bool operator > (const Student& student1, const Student& student2);
+  bool operator == (const Student& student1, const Student& student2);
+
+  // //Overloading the comparison operator for s
+  // std::ostream& operator<<(std::ostream& out, const Student& student);
 }
 #endif

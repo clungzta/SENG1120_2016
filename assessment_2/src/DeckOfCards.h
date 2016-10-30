@@ -39,7 +39,7 @@ namespace alex_m
 
       // Precondition: There is an card in the deck with name param @str
       // Postcondition: This card is found, then removed from the deck
-      bool remove(std::string str);
+      bool remove(std::string str) const;
 
       // Precondition: None
       // Postcondition: The length of the deck is returned as an integer

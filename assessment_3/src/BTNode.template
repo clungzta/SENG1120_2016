@@ -8,31 +8,24 @@ Semester 2 2016
 
 #include "BTNode.h"
 #include <string>
+#include <iostream>
 //Constructor
 
 namespace alex_m
 {
-	//Constructor has default arguments, these are specified in the header definition
-	// template <typename Object>
-	// BTNode<Object>::BTNode(const Object& initial_data /*=Object()*/, BTNode<Object>* initial_prev_link /*=NULL*/, BTNode<Object>* initial_next_link /*=NULL*/)
-	// {
-	// 	d = initial_data;
-	// 	prev = initial_prev_link;	
-	// 	next = initial_next_link;
-	// }
-
-	//Constructor has default arguments, these are specified in the header definition
 	template <typename Object>
-	BTNode<Object>::BTNode()
+	BTNode<Object>::BTNode(const Object& initial_data)
 	{
-
+		d = initial_data;
+		left_ = NULL;
+		right_ = NULL;
 	}
 
 	template <typename Object>
 	BTNode<Object>::~BTNode()
 	{
-		next = NULL;
-		prev = NULL;
+		left_ = NULL;
+		right_ = NULL;
 	}
 
 	template <typename Object>
@@ -42,15 +35,15 @@ namespace alex_m
 	}
 
 	template <typename Object>
-	void BTNode<Object>::set_next_link(BTNode* new_link)
+	void BTNode<Object>::set_left(BTNode* new_link)
 	{
-		next = new_link;
+		left_ = new_link;
 	}
 
 	template <typename Object>
-	void BTNode<Object>::set_prev_link(BTNode* new_link)
+	void BTNode<Object>::set_right(BTNode* new_link)
 	{
-		prev = new_link;
+		right_ = new_link;
 	}
 
 	template <typename Object>
@@ -60,14 +53,20 @@ namespace alex_m
 	}
 
 	template <typename Object>
-	BTNode<Object>* BTNode<Object>::prev_link() const
+	BTNode<Object>* BTNode<Object>::left() const
 	{
-		return prev;
+		return left_;
 	}
 
 	template <typename Object>
-	BTNode<Object>* BTNode<Object>::next_link() const
+	BTNode<Object>* BTNode<Object>::right() const
 	{
-		return next;
+		return right_;
+	}
+
+	template <typename Object>
+	BTNode<Object>* BTNode<Object>::parent() const
+	{
+		return parent_;
 	}
 }

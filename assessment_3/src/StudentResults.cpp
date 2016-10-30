@@ -9,7 +9,7 @@ Semester 2 2016
 #include <iostream> // for cout and endl
 #include <cstdlib>  // for srand, rand and atoi
 #include <ctime>    // for time
-#include "BTree.h"  // REPLACE WITH CLASS OF STUDENTS!
+#include "ClassroomOfStudents.h"
 
 using namespace std;
 using namespace alex_m;
@@ -27,16 +27,14 @@ int main(int argc, char* argv[]) {
         srand(seed);
     }
 
-    // TO-DO: replace this big array of names with a file
-    string names [50] = { "Adam", "Adrian", "Alexander", "Andrew", "Ashley", "Benjamin", "Bradley", "Brobie", "Callan",
+    std::list<std::string> student_names = { "Adam", "Adrian", "Alexander", "Andrew", "Ashley", "Benjamin", "Bradley", "Brobie", "Callan",
      "Callum", "Cameron", "Chris", "Damian", "David", "Dillon", "Dylan", "Ethan", "Frederik", "Hong", "Hugh", "Jackson",
      "Jacob", "James", "Jared", "Jodi", "Jonathan", "Joshua", "Julius", "Kelly", "Kenias", "KiSoon", "Lance", "Liam",
      "Madison", "Magdalena", "Marcus", "Mark", "Melanie", "Min", "Mitchell", "Nicholas", "Ryan", "Sang", "Shane", "Simon",
      "Thomas", "Timothy", "Trent", "Troy", "Zaanif" };
 
-    //Shuffle the People before putting them into the list
+    ClassroomOfStudents* classroom = new ClassroomOfStudents(student_names);
+    cout << "Average: " << classroom->get_average_grade() << endl;
 
-
-      
     return 0;
 }

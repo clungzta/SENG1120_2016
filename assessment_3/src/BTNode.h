@@ -15,7 +15,7 @@ Semester 2 2016
 namespace alex_m
 {
     template <typename Object>
-    class BTNode //For a doubly linked list
+    class BTNode //For a doubly linked tree
     {
     public:
 
@@ -23,9 +23,9 @@ namespace alex_m
         // Precondition: None
         // Postcondition: A new node instance is created
         // @initial_data: Initial data to be stored in the node. Default Empty Object
-        // @initial_prev_link: Initial pointer to the previous node in the list. Default NULL
-        // @initial_next_link: Initial pointer to the next node in the list. Default NULL
-        BTNode();
+        // @initial_prev_link: Initial pointer to the previous node in the tree. Default NULL
+        // @initial_next_link: Initial pointer to the next node in the tree. Default NULL
+        BTNode(const Object& initial_data = Object());
         // BTNode(const Object& initial_data = Object(), BTNode* initial_prev_link = NULL, BTNode* initial_next_link = NULL);
 
         // Destructor
@@ -39,25 +39,30 @@ namespace alex_m
 
         // Precondition: None
         // Postcondition: The next_link pointer is set to @param new_link
-        void set_next_link(BTNode* new_link);
+        void set_left(BTNode* new_link);
 
         // Precondition: None
         // Postcondition: The prev_link pointer is set to @param new_link
-        void set_prev_link(BTNode* new_link);
+        void set_right(BTNode* new_link);
 
         //Data stored in the node
         Object data() const;
 
-        //Points to the next node in the list
-        BTNode* next_link() const;
+        //Points to the next node in the tree
+        BTNode* left() const;
 
-        //Points to the previous node in the list
-        BTNode* prev_link() const;
+        //Points to the previous node in the tree
+        BTNode* right() const;
+
+        //Points to the parent node in the tree
+        BTNode* parent() const;
 
     private:
         Object d;
-        BTNode* prev;    
-        BTNode* next;
+
+        BTNode* left_;
+        BTNode* right_;
+        BTNode* parent_;
     };
 }
 #include "BTNode.template"
