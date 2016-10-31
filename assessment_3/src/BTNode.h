@@ -45,6 +45,8 @@ namespace alex_m
         // Postcondition: The prev_link pointer is set to @param new_link
         void set_right(BTNode* new_link);
 
+        void set_parent(BTNode* new_link);
+
         //Data stored in the node
         Object data() const;
 
@@ -57,8 +59,15 @@ namespace alex_m
         //Points to the parent node in the tree
         BTNode* parent() const;
 
+        bool is_leaf() const;
+        bool is_left_child() const;
+        bool is_right_child() const;
+
     private:
         Object d;
+
+        bool is_left_child_;
+        bool is_right_child_;
 
         BTNode* left_;
         BTNode* right_;

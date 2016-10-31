@@ -20,7 +20,7 @@ namespace alex_m
   BTree<Object>::BTree()
   {
     //Initialise member variables
-    root = NULL;
+    root_ = NULL;
   }
 
   // Destructor
@@ -52,8 +52,67 @@ namespace alex_m
   }
 
   template <typename Object>
-  bool BTree<Object>::remove()
+  bool BTree<Object>::remove(const Object& entry)
   {
+    return remove(root_, entry, false);
+  }
+
+  template <typename Object>
+  bool BTree<Object>::remove(BTNode<Object>* node, const Object& entry, bool less_than)
+  {
+
+    if (node == NULL)
+    {
+      return false;
+    }
+
+    int relation = 0;// = entry.compare_to(node->data());
+
+    if (relation > 0)
+    {
+      //Need to keep searching to the right
+      remove(node->right(), entry, true);
+    }
+
+    else if (relation < 0)
+    {
+      //Need to keep searching to the left
+      remove(node->left(), entry, true);
+    }
+
+    else
+    {
+      //We have found the node to remove
+
+      //Several cases here
+      //Case 1: Remove Leaf Node
+      if (node->is_leaf())
+      {
+        //Root case
+        if (root_->compare_to(entry)==0)
+        {
+          root_ = NULL;
+        }
+        else
+        {
+          //Not root
+          //Update parent links
+          if (node->is_left_child())
+          {
+            //is the left child of another node
+            node->parent()->set_left(NULL);
+          }
+          else if (node->is_right_child())
+          {
+            //is the right child of another node
+            node->parent()->set_right(NULL);
+          }
+        }
+      }
+
+      //Case 2: Remove Node with one child
+      //Case 3: Remove Node with two children
+    }
     
   }
 
@@ -61,57 +120,35 @@ namespace alex_m
   bool BTree<Object>::goto_root()
   {
     //Set the current ptr to the root of the tree
-    if (root != NULL) { 
-      current_ptr = root;
-      return true;
-    }
-    else {
-      return false;
-    }
+    if (root_ != NULL) { current_ptr = root_; return true; }
+    return false;
   }
 
   template <typename Object>
   bool BTree<Object>::goto_left()
   {
-    if (!empty())
-    {
-        if (current_ptr->left() != NULL)
-        {
-          current_ptr = current_ptr->left();
-          return true;
-        }
+    if (current_ptr != NULL && current_ptr->left() != NULL)
+    { 
+      std::cout << "Going left, changing current from: " << current_ptr << " to: " << current_ptr->left() << std::endl;
+     // std::cout << current_ptr->data() << current_ptr->left()->data();
+      current_ptr = current_ptr->left();
+     // std::cout << current_ptr << current_ptr->left();
+      return true;
     }
-
     return false;
   }
 
   template <typename Object>
   bool BTree<Object>::goto_right()
   {
-    if (current_ptr != NULL)
-    {
-        if (current_ptr->right() != NULL)
-        {
-          current_ptr = current_ptr->right();
-          return true;
-        }
-    }
-
+    if (current_ptr != NULL && current_ptr->right() != NULL) { current_ptr = current_ptr->right(); std::cout << "Going left, changing current from: " << current_ptr << " to: " << current_ptr->right() << std::endl; return true;}
     return false;
   }
 
   template <typename Object>
   bool BTree<Object>::goto_parent()
   {
-    if (current_ptr != NULL)
-    {
-        if (current_ptr->parent() != NULL)
-        {
-          current_ptr = current_ptr->parent();
-          return true;
-        }
-    }
-
+    if (current_ptr != NULL && current_ptr->parent() != NULL) { current_ptr = current_ptr->parent(); return true; }
     return false;
   }
 
@@ -120,23 +157,71 @@ namespace alex_m
   {
     if (empty())
     {
-      root = new BTNode<Object>(entry);
-      current_ptr = root;
+      root_ = new BTNode<Object>(entry);
+      // current_ptr = root_;
     }
 
     else
     {
-      add(root, entry);
+      add(root_, entry);
     }
 
     size++;
   }
 
   template <typename Object>
+  std::string BTree<Object>::toString()
+  {
+    return toString(root_, 0);
+  }
+
+  template <typename Object>
+  std::string BTree<Object>::toString(BTNode<Object>* node, size_t level)
+  {
+    std::string str = "";
+    if (node != NULL)
+    {
+      // Right sub-tree
+      str += toString(node->right(), level + 1);
+      // Indent to indicate level
+      for (int i = 1; i <= level; ++i) { str = str + "| "; }
+      // Current node
+      str += node->data().get_name() + "\n";
+      // Left sub-tree
+      str += toString(node->left(), level + 1);
+    }
+    return str;
+  }
+
+  template <typename Object>
+  size_t BTree<Object>::countInRange(int low, int high)
+  {
+    return countInRange(root_, low, high);
+  }
+  
+  // Returns count of nodes in BST in range [low, high]
+  template <typename Object>
+  size_t BTree<Object>::countInRange(BTNode<Object>* node, int low, int high)
+  {
+    int count = 0;
+
+    if (node != NULL)
+    {
+      if (node->data().get_grade() <= high && node->data().get_grade() >= low) 
+      {
+        std::cout << "Counting: " << node->data().get_grade() << std::endl;
+        count = 1;
+      }
+      count += countInRange(node->left(), low, high) + countInRange(node->right(), low, high);
+    }
+    return count;
+  }
+
+  template <typename Object>
   bool BTree<Object>::empty() const
   {
     //Returns true if the tree is empty (nothing stored in the root node)
-    return (root == NULL);
+    return (root_ == NULL);
   }
 
   template <typename Object>
@@ -153,32 +238,10 @@ namespace alex_m
 
   }
 
-  // template <typename Object>
-  // float BTree<Object>::search(float target)
-  // {
-  //   return find(root, target);
-  // }
-
-  // template <typename Object>
-  // float BTree<Object>::find(BTNode<Object>* node, float target)
-  // {
-  //   if (node == NULL)
-  //   {
-  //     return NULL;
-  //   }
-  //   else
-  //   {
-  //     int relation = node->get_grade() < target;
-  //     if (relation == 0) { return node.value; }
-  //     else if (relation > 0) { return find(node.right, target); }
-  //     else { return find(node.left, target); }
-  //   }
-  // }
-
   template <typename Object>
   std::string BTree<Object>::inOrder()
   {
-    return inOrder(root);
+    return inOrder(root_);
   }
 
   template <typename Object>
@@ -197,25 +260,24 @@ namespace alex_m
   template <typename Object>
   float BTree<Object>::average()
   {
-    average_sum = 0;
-    return average(root);
+    return average(root_) / tree_count();
   }
 
   template <typename Object>
   float BTree<Object>::average(BTNode<Object>* node)
   {
+    float average_sum = 0;
 
     if (node != NULL)
     {
-      average_counter++;
-      inOrder(node->left());
-      average_sum = average_sum + node->data();
-      inOrder(node->right());
+      average_sum += average(node->left());
+      average_sum = average_sum + node->data(); //Overload += for student
+      average_sum += average(node->right());
     }
 
-    std::cout << average_sum << " " << average_counter << endl;
+    //std::cout << average_sum << " " << tree_count() << endl;
     
-    return average_sum / tree_count();
+    return average_sum;
   }
 
   template <typename Object>
@@ -225,17 +287,21 @@ namespace alex_m
 
     if (relation == 0)
     {
-      // Replace existing Object
+      // comparision 0: Replace existing Object
       node->set_data(it);
     }
 
     else if (relation > 0)
     {
-      // Work on right side
+      // comparision 1: Work on right side
       if (node->right() == NULL)
       {
-        node->set_right(new BTNode<Object>(it));
+        BTNode<Object>* new_node = new BTNode<Object>(it);
+        new_node->set_parent(node);
+        node->set_right(new_node);
       }
+
+      //Right is not empty, recur
       else
       {
         add(node->right(), it);
@@ -245,14 +311,18 @@ namespace alex_m
     else if (node->left() == NULL)
     {
       // Work on left side
-      node->set_left(new BTNode<Object>(it));
+      // comparision -1: and left is empty
+      BTNode<Object>* new_node = new BTNode<Object>(it);
+      new_node->set_parent(node);
+      node->set_left(new_node);
     }
 
+    // comparision -1: and left is not empty, recur
     else
     {
       add(node->left(), it);
     }
 
-    current_ptr = node;
+    //current_ptr = node;
   }
 }

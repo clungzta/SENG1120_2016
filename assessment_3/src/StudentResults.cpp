@@ -34,6 +34,8 @@ int main(int argc, char* argv[]) {
      "Thomas", "Timothy", "Trent", "Troy", "Zaanif" };
 
     ClassroomOfStudents* classroom = new ClassroomOfStudents(student_names);
+    
+    cout << "HDs: " << classroom->countHDs() << endl;
     cout << "Average: " << classroom->get_average_grade() << endl;
 
     return 0;

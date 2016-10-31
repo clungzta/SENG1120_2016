@@ -29,7 +29,9 @@ namespace alex_m
 
     Object get_current() const;
     void set_current(const Object& entry);
-    bool remove();
+
+    bool remove(const Object& entry);
+    bool remove(BTNode<Object>* node, const Object& entry, bool less_than);
     bool goto_root();
     bool goto_left();
     bool goto_right();
@@ -38,18 +40,25 @@ namespace alex_m
     bool empty() const;
     bool tree_search(const Object& target);
     void tree_clear();
+
     std::string inOrder();
     std::string inOrder(BTNode<Object>* node);
+
+    std::string toString();
+    std::string toString(BTNode<Object>* node, size_t level);
+
+    size_t countInRange(BTNode<Object>* node, int low, int high);
+    size_t countInRange(int low, int high);
+
     float average();
 
 	private:
     // Private member varibles
-    BTNode<Object>* root;
+    BTNode<Object>* root_;
     BTNode<Object>* current_ptr;
 
     float average(BTNode<Object>* node);
     int average_counter;
-    float average_sum;
     std::string printed;
 
     void add(BTNode<Object>* node, Object it); // Helper function

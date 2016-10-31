@@ -37,7 +37,7 @@ namespace alex_m
 
       float get_average_grade();
 
-      int count_above_threshold();
+      int countHDs();
     
     private:
       // Precondition: There are cards stored in the deck

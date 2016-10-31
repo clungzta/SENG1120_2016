@@ -33,18 +33,41 @@ namespace alex_m
     }
 
     btree->goto_root();
-    cout << "done! " << btree->tree_count() << endl;
-    cout << btree->goto_root() << " root node: " << btree->get_current() << endl;
-    cout << btree->goto_right() << " right of root node: " << btree->get_current() << endl;
-    cout << btree->goto_parent() << " back to root node (using goto_parent()): " << btree->get_current() << endl;
-    cout << btree->goto_parent() << " abcdefg! " << btree->get_current() << endl;
+
+    cout << btree->toString();
+
+    cout << btree->goto_root();
+    cout << " root node: " << btree->get_current() << endl;
+
+    cout << btree->goto_left() << " left of root node: ";
+    cout << btree->get_current() << endl;
+
+    cout << btree->goto_root() << " root node: ";
+    cout << btree->get_current() << endl;
+
+    cout << btree->goto_right() << endl;
+    cout << " right of root node: " << btree->get_current() << endl;
+
+    cout << btree->goto_root();
+    cout << " root node: " << btree->get_current() << endl;
+
+    cout << btree->goto_right() << endl;
+    cout << " right of root node: " << btree->get_current() << endl;
+
+    cout << btree->goto_parent();
+    cout << " back to root node (using goto_parent()): " << btree->get_current() << endl;
+    
+    // cout << btree->goto_parent() << " abcdefg! " << btree->get_current() << endl;
 
     btree->get_current();
 
 
-    //cout << "hijklmn! " << btree->get_current().get_name() << endl;
 
     cout << btree->inOrder() << endl;
+
+    Student* new_student = new Student();
+    new_student->set_name("Hugh");
+    // btree->remove(*new_student);
   }
 
   //Destructor
@@ -89,9 +112,8 @@ namespace alex_m
     return btree->average();
   }
 
-  // int ClassroomOfStudents::count_above_threshold(int threshold)
-  // {
-
-  // }
-
+  int ClassroomOfStudents::countHDs()
+  {
+    return btree->countInRange(85,100);  
+  }
 }

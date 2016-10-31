@@ -16,12 +16,6 @@ namespace alex_m
 
     }
 
-    // Student::Student(const std::string& student_name, const float& student_grade)
-    // {
-    // 	name = student_name;
-    // 	grade = student_grade;
-    // }
-
     Student::~Student()
     {
     	

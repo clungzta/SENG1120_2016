@@ -47,6 +47,12 @@ namespace alex_m
 	}
 
 	template <typename Object>
+	void BTNode<Object>::set_parent(BTNode* new_link)
+	{
+		parent_ = new_link;
+	}
+
+	template <typename Object>
 	Object BTNode<Object>::data() const
 	{
 		return d;
@@ -68,5 +74,23 @@ namespace alex_m
 	BTNode<Object>* BTNode<Object>::parent() const
 	{
 		return parent_;
+	}
+
+	template <typename Object>
+	bool BTNode<Object>::is_leaf() const
+	{
+		return (left_ == NULL && right_ == NULL);
+	}
+
+	template <typename Object>
+	bool BTNode<Object>::is_left_child() const
+	{
+		return is_left_child_;
+	}
+
+	template <typename Object>
+	bool BTNode<Object>::is_right_child() const
+	{
+		return is_right_child_;
 	}
 }
