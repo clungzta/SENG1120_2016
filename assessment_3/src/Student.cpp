@@ -11,6 +11,18 @@ Semester 2 2016
 
 namespace alex_m
 {
+    Student::Student(const std::string& student_name = std::string(), const float& student_grade = 0)
+    {
+        name = student_name;
+        grade = student_grade;
+    }
+
+    Student::Student(const Student& s)
+    {
+        name = s.name.c_str();
+        grade = s.grade;
+    }
+
     Student::Student()
     {
 
@@ -41,7 +53,7 @@ namespace alex_m
     	return grade;
     }
 
-    int Student::compare_to(const Student& another_student)
+    int Student::compare_to(const Student& another_student) const
     {
         int output = 0;
         if (name < another_student.get_name()) {output = -1;}
@@ -66,18 +78,18 @@ namespace alex_m
         return other + student.get_grade(); 
     }
 
-    bool operator < (const Student& student1, const Student& student2)
-    {
-        return student1.get_name() < student2.get_name();
-    }
+    // bool operator < (const Student& student1, const Student& student2)
+    // {
+    //     return student1.get_name() < student2.get_name();
+    // }
 
-    bool operator > (const Student& student1, const Student& student2)
-    {
-        return student1.get_name() > student2.get_name();
-    }
+    // bool operator > (const Student& student1, const Student& student2)
+    // {
+    //     return student1.get_name() > student2.get_name();
+    // }
 
-    bool operator == (const Student& student1, const Student& student2)
-    {
-        return student1.get_name() == student2.get_name();
-    }
+    // bool operator == (const Student& student1, const Student& student2)
+    // {
+    //     return student1.get_name() == student2.get_name();
+    // }
 }

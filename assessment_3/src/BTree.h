@@ -10,6 +10,8 @@ Semester 2 2016
 #define BTree_H
 
 #include "BTNode.h"
+#include "BTree.h"
+#include "BTNode.h"
 #include <string>
 
 namespace alex_m
@@ -31,7 +33,7 @@ namespace alex_m
     void set_current(const Object& entry);
 
     bool remove(const Object& entry);
-    bool remove(BTNode<Object>* node, const Object& entry, bool less_than);
+    bool remove(BTNode<Object>* node_to_remove, const Object& entry);
     bool goto_root();
     bool goto_left();
     bool goto_right();
@@ -41,8 +43,8 @@ namespace alex_m
     bool tree_search(const Object& target);
     void tree_clear();
 
-    std::string inOrder();
-    std::string inOrder(BTNode<Object>* node);
+    std::string inOrder(); // Make generic with function ptr?
+    std::string inOrder(BTNode<Object>* node); // Make generic with function ptr?
 
     std::string toString();
     std::string toString(BTNode<Object>* node, size_t level);
@@ -52,14 +54,18 @@ namespace alex_m
 
     float average();
 
+    template <typename Predicate>
+    void removeif(Predicate p);
 	private:
     // Private member varibles
     BTNode<Object>* root_;
     BTNode<Object>* current_ptr;
 
-    float average(BTNode<Object>* node);
-    int average_counter;
-    std::string printed;
+    template <typename Predicate>
+    void removeif(BTNode<Object>* node, Predicate p);
+
+    BTNode<Object>* find_min(BTNode<Object>* node);
+    float average(BTNode<Object>* node); // Move to Classroom of students
 
     void add(BTNode<Object>* node, Object it); // Helper function
     size_t size;

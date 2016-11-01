@@ -6,8 +6,6 @@ Semester 2 2016
 
 **/
 
-#include "BTNode.h"
-#include "BTree.h"
 #include <string>
 #include <iostream>
 
@@ -54,42 +52,72 @@ namespace alex_m
   template <typename Object>
   bool BTree<Object>::remove(const Object& entry)
   {
-    return remove(root_, entry, false);
+    return remove(root_, entry);
   }
 
   template <typename Object>
-  bool BTree<Object>::remove(BTNode<Object>* node, const Object& entry, bool less_than)
+  template <typename Predicate>
+  void BTree<Object>::removeif(Predicate p)
+  {
+    removeif(root_, p);
+  }
+
+  template <typename Object>
+  template <typename Predicate>
+  void BTree<Object>::removeif(BTNode<Object>* node, Predicate p)
+  {
+    if(node != NULL)
+    {
+
+      removeif(node->left(), p);
+      removeif(node->right(), p);
+
+      if(p(node->data()))
+      {
+        remove(node, node->data());
+      }
+    }
+  }
+
+  template <typename Object>
+  bool BTree<Object>::remove(BTNode<Object>* node_to_remove, const Object& entry)
   {
 
-    if (node == NULL)
+    if (node_to_remove == NULL)
     {
       return false;
     }
 
-    int relation = 0;// = entry.compare_to(node->data());
+    // std::cout << "removing: " << entry << std::endl;
+
+    int relation = entry.compare_to(node_to_remove->data());
 
     if (relation > 0)
     {
       //Need to keep searching to the right
-      remove(node->right(), entry, true);
+      remove(node_to_remove->right(), entry);
     }
 
     else if (relation < 0)
     {
       //Need to keep searching to the left
-      remove(node->left(), entry, true);
+      remove(node_to_remove->left(), entry);
     }
 
     else
     {
+      // std::cout << node_to_remove << std::endl;
       //We have found the node to remove
 
       //Several cases here
-      //Case 1: Remove Leaf Node
-      if (node->is_leaf())
+      //Case 1: Remove Leaf node
+      if (node_to_remove->is_leaf())
       {
+        
+        // std::cout << "removing leaf: " << entry << std::endl;
+
         //Root case
-        if (root_->compare_to(entry)==0)
+        if (root_ == node_to_remove)
         {
           root_ = NULL;
         }
@@ -97,23 +125,96 @@ namespace alex_m
         {
           //Not root
           //Update parent links
-          if (node->is_left_child())
+          if (node_to_remove->is_left_child())
           {
-            //is the left child of another node
-            node->parent()->set_left(NULL);
+            //is the left child of another node_to_remove
+            node_to_remove->parent()->set_left(NULL);
           }
-          else if (node->is_right_child())
+          else
           {
-            //is the right child of another node
-            node->parent()->set_right(NULL);
+            //is the right child of another node_to_remove
+            node_to_remove->parent()->set_right(NULL);
           }
         }
+
+        delete node_to_remove;
+        size--;
       }
 
-      //Case 2: Remove Node with one child
+      //Case 2: Remove node with one child
+      else if (node_to_remove->has_single_child())
+      {
+        // std::cout << "removing node with single child: " << entry << std::endl;
+        //If we are removing the root node
+        if (root_ == node_to_remove)
+        {
+          // std::cout << "removing root: " << entry << std::endl;
+          // std::cout << node_to_remove << std::endl;
+          // std::cout << node_to_remove->right() << " " << node_to_remove->left() << std::endl;
+          if (node_to_remove->right() != NULL)
+          { 
+            // std::cout << "removing node with right child" << std::endl;
+            node_to_remove->right()->set_parent(NULL);
+            root_ = node_to_remove->right();
+          }
+
+          // right is NULL, node_to_remove has a child: this implies left must not be NULL
+          else
+          {
+            node_to_remove->left()->set_parent(NULL);
+            root_ = node_to_remove->left();
+          }
+        }
+        else
+        {
+          //Removing node with a right child
+          if (node_to_remove->right() != NULL)
+          {
+            // std::cout << "removing node with right child" << std::endl;
+            node_to_remove->right()->set_parent(node_to_remove->parent());
+            
+            //CHECK IMPLEMENTATION WHEN INSERTING OF IS_RIGHT_CHILD
+            if (node_to_remove->is_right_child()) { node_to_remove->parent()->set_right(node_to_remove->right()); }
+            else { node_to_remove->parent()->set_left(node_to_remove->right()); }
+          }
+
+          //Removing node with a left child
+          else
+          {
+            // std::cout << "removing node with left child" << node_to_remove->is_right_child() << std::endl;
+            node_to_remove->left()->set_parent(node_to_remove->parent());
+            
+            //CHECK IMPLEMENTATION WHEN INSERTING OF IS_RIGHT_CHILD
+            if (node_to_remove->is_right_child()) { node_to_remove->parent()->set_right(node_to_remove->left()); }
+            else { node_to_remove->parent()->set_left(node_to_remove->left()); }
+          }
+        }
+        delete node_to_remove;
+        size--;
+      }
+
       //Case 3: Remove Node with two children
+      else
+      {
+        // std::cout << "removing node with multiple children: " << entry << std::endl;
+
+        BTNode<Object>* temp = find_min(node_to_remove->left());
+        Object swap(temp->data());
+        //std::cout << temp->data() << std::endl;
+        node_to_remove->set_data(swap);
+        remove(temp, swap);
+        // if(node->get_data() < entry)
+        // remove(node, entry);
+      }
     }
-    
+    return true;
+  }
+
+  template <typename Object>
+  BTNode<Object>* BTree<Object>::find_min(BTNode<Object>* node)
+  {
+    if(node->right() != NULL) return find_min(node->right());
+    else return node;
   }
 
   template <typename Object>
@@ -184,7 +285,7 @@ namespace alex_m
       // Right sub-tree
       str += toString(node->right(), level + 1);
       // Indent to indicate level
-      for (int i = 1; i <= level; ++i) { str = str + "| "; }
+      for (size_t i = 1; i <= level; ++i) { str = str + "| "; }
       // Current node
       str += node->data().get_name() + "\n";
       // Left sub-tree
@@ -198,7 +299,7 @@ namespace alex_m
   {
     return countInRange(root_, low, high);
   }
-  
+
   // Returns count of nodes in BST in range [low, high]
   template <typename Object>
   size_t BTree<Object>::countInRange(BTNode<Object>* node, int low, int high)
@@ -207,11 +308,7 @@ namespace alex_m
 
     if (node != NULL)
     {
-      if (node->data().get_grade() <= high && node->data().get_grade() >= low) 
-      {
-        std::cout << "Counting: " << node->data().get_grade() << std::endl;
-        count = 1;
-      }
+      if (node->data().get_grade() <= high && node->data().get_grade() >= low) { count = 1; }
       count += countInRange(node->left(), low, high) + countInRange(node->right(), low, high);
     }
     return count;
@@ -228,7 +325,7 @@ namespace alex_m
   bool BTree<Object>::tree_search(const Object& target)
   {
     //Searches the tree for a node containing data param @target
-
+    return false;
   }
 
   template <typename Object>
@@ -247,11 +344,13 @@ namespace alex_m
   template <typename Object>
   std::string BTree<Object>::inOrder(BTNode<Object>* node)
   {
+    std::string printed;
+
     if (node != NULL)
     {
-      inOrder(node->left());
+      printed += inOrder(node->left());
       printed = printed + node->data() + " ";
-      inOrder(node->right());
+      printed += inOrder(node->right());
     }
 
     return printed;
@@ -274,9 +373,6 @@ namespace alex_m
       average_sum = average_sum + node->data(); //Overload += for student
       average_sum += average(node->right());
     }
-
-    //std::cout << average_sum << " " << tree_count() << endl;
-    
     return average_sum;
   }
 
@@ -308,21 +404,23 @@ namespace alex_m
       }
     }
 
-    else if (node->left() == NULL)
+    else 
     {
-      // Work on left side
-      // comparision -1: and left is empty
-      BTNode<Object>* new_node = new BTNode<Object>(it);
-      new_node->set_parent(node);
-      node->set_left(new_node);
-    }
+      if (node->left() == NULL)
+      {
+        // Work on left side
+        // comparision -1: and left is empty
+        BTNode<Object>* new_node = new BTNode<Object>(it);
+        new_node->set_parent(node);
+        node->set_left(new_node);
+      }
 
-    // comparision -1: and left is not empty, recur
-    else
-    {
-      add(node->left(), it);
+      // comparision -1: and left is not empty, recur
+      else
+      {
+        add(node->left(), it);
+      }
     }
-
     //current_ptr = node;
   }
 }

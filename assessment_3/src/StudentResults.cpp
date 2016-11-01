@@ -27,6 +27,8 @@ int main(int argc, char* argv[]) {
         srand(seed);
     }
 
+    cout.precision(2);
+
     std::list<std::string> student_names = { "Adam", "Adrian", "Alexander", "Andrew", "Ashley", "Benjamin", "Bradley", "Brobie", "Callan",
      "Callum", "Cameron", "Chris", "Damian", "David", "Dillon", "Dylan", "Ethan", "Frederik", "Hong", "Hugh", "Jackson",
      "Jacob", "James", "Jared", "Jodi", "Jonathan", "Joshua", "Julius", "Kelly", "Kenias", "KiSoon", "Lance", "Liam",
@@ -34,9 +36,16 @@ int main(int argc, char* argv[]) {
      "Thomas", "Timothy", "Trent", "Troy", "Zaanif" };
 
     ClassroomOfStudents* classroom = new ClassroomOfStudents(student_names);
-    
-    cout << "HDs: " << classroom->countHDs() << endl;
+    cout << *classroom << endl;    
+    cout << endl << "HDs: " << classroom->countHDs() << endl;
     cout << "Average: " << classroom->get_average_grade() << endl;
 
+    classroom->remove_failed();
+
+    cout << endl << *classroom << endl;
+    cout << endl << "HDs: " << classroom->countHDs() << endl;
+    cout << "Average: " << classroom->get_average_grade() << endl;
+
+    delete classroom;
     return 0;
 }

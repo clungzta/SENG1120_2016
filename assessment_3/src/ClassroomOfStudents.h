@@ -34,8 +34,11 @@ namespace alex_m
       // This frees the memory used by the list from the heap.
       ~ClassroomOfStudents();
 
+      std::string value() const;
 
       float get_average_grade();
+
+      void remove_failed();
 
       int countHDs();
     
@@ -51,5 +54,8 @@ namespace alex_m
       //Std List to contain the student names prior to placing in tree
       BTree<Student>* btree;
   };
+
+  //Override the cout operator
+  std::ostream& operator<<(std::ostream& out, const ClassroomOfStudents& classroom);
 }
 #endif

@@ -24,8 +24,10 @@ namespace alex_m
         // @initially_name_up: Is the card initially name up? Default False
         //const Object& initial_data = Object(), BTNode* initial_prev_link = NULL, BTNode* initial_next_link = NULL
         Student();
-        // Student(const std::string& student_name, const float& student_grade);
-        // Student(const std::string& student_name = std::string(), const float& student_grade = 0);
+
+        Student(const std::string& student_name, const float& student_grade);
+
+        Student(const Student& s);
 
         // Destructor
         // Precondition: None
@@ -44,7 +46,7 @@ namespace alex_m
         // Postcondition: The floateger grade of the card is returned
         float get_grade() const;
 
-        int compare_to(const Student& another_student);
+        int compare_to(const Student& another_student) const;
 
         // Precondition: None
         // Postcondition: The string grade of the card is returned

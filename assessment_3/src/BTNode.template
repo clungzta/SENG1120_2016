@@ -19,6 +19,7 @@ namespace alex_m
 		d = initial_data;
 		left_ = NULL;
 		right_ = NULL;
+		parent_ = NULL;
 	}
 
 	template <typename Object>
@@ -26,6 +27,7 @@ namespace alex_m
 	{
 		left_ = NULL;
 		right_ = NULL;
+		parent_ = NULL;
 	}
 
 	template <typename Object>
@@ -83,14 +85,23 @@ namespace alex_m
 	}
 
 	template <typename Object>
+	bool BTNode<Object>::has_single_child() const
+	{
+		//Essentially an XOR of the pointers to children
+		return ((left_ == NULL && right_ != NULL) || (left_ != NULL && right_ == NULL));
+	}
+
+	template <typename Object>
 	bool BTNode<Object>::is_left_child() const
 	{
-		return is_left_child_;
+		if(parent_->left() == this) return true;
+		else return false;
 	}
 
 	template <typename Object>
 	bool BTNode<Object>::is_right_child() const
 	{
-		return is_right_child_;
+		if(parent_->right() == this) return true;
+		else return false;
 	}
 }

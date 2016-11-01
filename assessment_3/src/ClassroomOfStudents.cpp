@@ -14,6 +14,11 @@ Semester 2 2016
 
 namespace alex_m
 {
+  bool is_failed(Student s)
+  {
+    return (s.get_grade() < 50);
+  }
+
   ClassroomOfStudents::ClassroomOfStudents(std::list<std::string>& student_names)
   {  
     names = student_names;
@@ -24,50 +29,16 @@ namespace alex_m
     std::list<std::string>::const_iterator student_name_iterator;
     for (student_name_iterator = names.begin(); student_name_iterator != names.end(); ++student_name_iterator)
     {
-      float grade = float(rand() % 101);
-
-      Student* a_student = new Student();
-      a_student->set_grade(grade);
-      a_student->set_name(*student_name_iterator);
-      btree->tree_insert(*a_student);
+      btree->tree_insert(Student(*student_name_iterator, float(rand() % 101)));
     }
 
     btree->goto_root();
 
-    cout << btree->toString();
+    // cout << btree->toString() << endl;
+  
 
-    cout << btree->goto_root();
-    cout << " root node: " << btree->get_current() << endl;
-
-    cout << btree->goto_left() << " left of root node: ";
-    cout << btree->get_current() << endl;
-
-    cout << btree->goto_root() << " root node: ";
-    cout << btree->get_current() << endl;
-
-    cout << btree->goto_right() << endl;
-    cout << " right of root node: " << btree->get_current() << endl;
-
-    cout << btree->goto_root();
-    cout << " root node: " << btree->get_current() << endl;
-
-    cout << btree->goto_right() << endl;
-    cout << " right of root node: " << btree->get_current() << endl;
-
-    cout << btree->goto_parent();
-    cout << " back to root node (using goto_parent()): " << btree->get_current() << endl;
-    
-    // cout << btree->goto_parent() << " abcdefg! " << btree->get_current() << endl;
-
-    btree->get_current();
-
-
-
-    cout << btree->inOrder() << endl;
-
-    Student* new_student = new Student();
-    new_student->set_name("Hugh");
-    // btree->remove(*new_student);
+    btree->goto_root();
+    //cout << btree->toString() << endl << btree->tree_count() << endl;
   }
 
   //Destructor
@@ -115,5 +86,21 @@ namespace alex_m
   int ClassroomOfStudents::countHDs()
   {
     return btree->countInRange(85,100);  
+  }
+
+  void ClassroomOfStudents::remove_failed()
+  {
+    btree->removeif(is_failed);
+  }
+
+  std::string ClassroomOfStudents::value() const
+  {
+    return btree->inOrder();
+  }
+
+  std::ostream& operator<<(std::ostream& out, const ClassroomOfStudents& classroom)
+  {
+    out << classroom.value();
+    return out;
   }
 }

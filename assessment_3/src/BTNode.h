@@ -60,14 +60,12 @@ namespace alex_m
         BTNode* parent() const;
 
         bool is_leaf() const;
+        bool has_single_child() const;
         bool is_left_child() const;
         bool is_right_child() const;
 
     private:
         Object d;
-
-        bool is_left_child_;
-        bool is_right_child_;
 
         BTNode* left_;
         BTNode* right_;
