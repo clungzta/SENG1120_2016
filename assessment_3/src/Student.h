@@ -1,7 +1,7 @@
 /**
 
-SENG1120 Assignment 1
-Created by Alex McClung
+SENG1120 Assignment 3
+Created by Alex McClung, 3256853
 Semester 2 2016
 
 **/
@@ -16,55 +16,144 @@ namespace alex_m
     class Student
     {
     public:
-        // Constructor
-        // Precondition: None
-        // Postcondition: A new Student instance is created
-        // @initial_name: Initial name of the Student. Default: Empty String
-        // @initial_grade: Initial floateger grade of the card. Default Empty String
-        // @initially_name_up: Is the card initially name up? Default False
-        //const Object& initial_data = Object(), BTNode* initial_prev_link = NULL, BTNode* initial_next_link = NULL
+
+        /**
+         * @brief      { function_description }
+         */
         Student();
 
+        /**
+         * @brief      { function_description }
+         *
+         * @param[in]  student_name   The student name
+         * @param[in]  student_grade  The student grade
+         */
         Student(const std::string& student_name, const float& student_grade);
 
+        /**
+         * @brief      { function_description }
+         *
+         * @param[in]  s     { parameter_description }
+         */
         Student(const Student& s);
 
-        // Destructor
-        // Precondition: None
-        // Postcondition: The Student instance is deleted
+        /**
+         * @brief      Destroys the object.
+         */
         ~Student();
-
-        // Precondition: None
-        // Postcondition: The data stored within the Student is set to @param new_data
+        
+        /**
+         * @brief      Sets the name.
+         *
+         * @param[in]  new_name  The new name
+         */
         void set_name(const std::string new_name);
 
-        // Precondition: None
-        // Postcondition: The data stored within the Student is set to @param new_data
+        /**
+         * @brief      Sets the grade.
+         *
+         * @param[in]  new_grade  The new grade
+         */
         void set_grade(const float new_grade);
 
-        // Precondition: None
-        // Postcondition: The floateger grade of the card is returned
+        /**
+         * @brief      Gets the grade.
+         *
+         * @return     The grade.
+         */
         float get_grade() const;
 
+        /**
+         * @brief      Determines if grade in range.
+         *
+         * @param[in]  low_threshold   The low threshold
+         * @param[in]  high_threshold  The high threshold
+         *
+         * @return     True if grade in range, False otherwise.
+         */
+        bool is_grade_in_range(float low_threshold, float high_threshold);
+
+        /**
+         * @brief      { function_description }
+         *
+         * @param[in]  another_student  Another student
+         *
+         * @return     { description_of_the_return_value }
+         */
         int compare_to(const Student& another_student) const;
 
-        // Precondition: None
-        // Postcondition: The string grade of the card is returned
+        /**
+         * @brief      Gets the name.
+         *
+         * @return     The name.
+         */
         std::string get_name() const;
 
     private:
+        /**
+         * { item_description }
+         */
         std::string name;
+        
+        /**
+         * { item_description }
+         */
         float grade;
     };
-   //Overloading the cout operator for a Student
-  std::ostream& operator << (std::ostream& out, const Student& student);
-  std::string operator + (const std::string& other, const Student& student);
-  float operator + (const float& other, const Student& student);
-  bool operator < (const Student& student1, const Student& student2);
-  bool operator > (const Student& student1, const Student& student2);
-  bool operator == (const Student& student1, const Student& student2);
 
-  // //Overloading the comparison operator for s
-  // std::ostream& operator<<(std::ostream& out, const Student& student);
+  /**
+   * @brief      { operator_description }
+   *
+   * @param      out      The out
+   * @param[in]  student  The student
+   *
+   * @return     { description_of_the_return_value }
+   */
+  std::ostream& operator << (std::ostream& out, const Student& student);
+  
+  /**
+   * @brief      { operator_description }
+   *
+   * @param[in]  other    The other
+   * @param[in]  student  The student
+   *
+   * @return     { description_of_the_return_value }
+   */
+  std::string operator + (const std::string& other, const Student& student);
+  
+  /**
+   * @brief      { operator_description }
+   *
+   * @param[in]  other    The other
+   * @param[in]  student  The student
+   *
+   * @return     { description_of_the_return_value }
+   */
+  float operator + (const float& other, const Student& student);
+  
+  /**
+   * @brief      { operator_description }
+   *
+   * @param[in]  student1  The student 1
+   * @param[in]  student2  The student 2
+   *
+   * @return     { description_of_the_return_value }
+   */
+  bool operator < (const Student& student1, const Student& student2);
+  
+  /**
+   * { item_description }
+   */
+  bool operator > (const Student& student1, const Student& student2);
+  
+  /**
+   * @brief      { operator_description }
+   *
+   * @param[in]  student1  The student 1
+   * @param[in]  student2  The student 2
+   *
+   * @return     { description_of_the_return_value }
+   */
+  bool operator == (const Student& student1, const Student& student2);
 }
 #endif

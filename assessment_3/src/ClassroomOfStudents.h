@@ -1,7 +1,7 @@
 /**
 
-SENG1120 Assignment 1
-Created by Alex McClung
+SENG1120 Assignment 3
+Created by Alex McClung, 3256853
 Semester 2 2016
 
 **/
@@ -20,42 +20,75 @@ namespace alex_m
   {
     public:
 
-      // Constructor
-      // Precondition: None
-      // Postcondition: A full deck of cards is generated.
-      // The card names are stored in a LinkedList of string data.
-      // Numbers are 2 to 10, plus J, Q, K, A. 
-      // There are four cards of each suit, i.e. “S” = spades, “H” for hearts, “C” for clubs, “D” for diamonds
+      /**
+       * @brief      { function_description }
+       *
+       * @param      student_names  The student names
+       */
       ClassroomOfStudents(std::list<std::string>& student_names);
 
-      // Destructor
-      // Precondition: A DeckOfClass object is instansiated.
-      // Postcondition: The list pointer (member variable) is deleted.
-      // This frees the memory used by the list from the heap.
+
+      /**
+       * @brief      Destroys the object.
+       */
       ~ClassroomOfStudents();
 
+      /**
+       * @brief      { function_description }
+       *
+       * @return     { description_of_the_return_value }
+       */
       std::string value() const;
 
+      /**
+       * @brief      Gets the average grade.
+       *
+       * @return     The average grade.
+       */
       float get_average_grade();
 
+      /**
+       * @brief      Removes a failed.
+       */
       void remove_failed();
 
+      /**
+       * @brief      Counts the number of High Distinction Grades.
+       *
+       * @return     Number of High Distinction Grades.
+       */
       int countHDs();
     
     private:
-      // Precondition: There are cards stored in the deck
-      // Postcondition: The positions of these cards are randomized
-      // using the yates shuffle algorithm
+      
+      /**
+       * @brief 
+       *  Precondition: There are cards stored in the deck
+       *  Postcondition: The positions of these cards are randomized using the yates shuffle algorithm
+       */
       void shuffle_names();
 
-      //Std List to contain the student names prior to placing in tree
+      //
+      
+      /**
+       * Std List to contain the student names prior to placing in tree
+       */
       std::list<std::string> names;
-
-      //Std List to contain the student names prior to placing in tree
+      
+      /**
+       * Binary search tree (BST), to store Students objects ordered by name
+       */
       BTree<Student>* btree;
   };
 
-  //Override the cout operator
+  /**
+   * @brief      Overload the cout operator
+   *
+   * @param      out        The out
+   * @param[in]  classroom  The classroom
+   *
+   * @return     { description_of_the_return_value }
+   */
   std::ostream& operator<<(std::ostream& out, const ClassroomOfStudents& classroom);
 }
 #endif

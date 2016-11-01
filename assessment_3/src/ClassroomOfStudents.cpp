@@ -1,7 +1,7 @@
 /**
 
-SENG1120 Assignment 1
-Created by Alex McClung
+SENG1120 Assignment 3
+Created by Alex McClung, 3256853
 Semester 2 2016
 
 **/
@@ -14,10 +14,6 @@ Semester 2 2016
 
 namespace alex_m
 {
-  bool is_failed(Student s)
-  {
-    return (s.get_grade() < 50);
-  }
 
   ClassroomOfStudents::ClassroomOfStudents(std::list<std::string>& student_names)
   {  
@@ -33,12 +29,6 @@ namespace alex_m
     }
 
     btree->goto_root();
-
-    // cout << btree->toString() << endl;
-  
-
-    btree->goto_root();
-    //cout << btree->toString() << endl << btree->tree_count() << endl;
   }
 
   //Destructor
@@ -88,14 +78,20 @@ namespace alex_m
     return btree->countInRange(85,100);  
   }
 
-  void ClassroomOfStudents::remove_failed()
-  {
-    btree->removeif(is_failed);
-  }
-
   std::string ClassroomOfStudents::value() const
   {
     return btree->inOrder();
+  }
+
+  //Non class member, used as a "predicate" for recursive remove from tree
+  bool is_failed(Student s)
+  {
+    return s.is_grade_in_range(0,50);
+  }
+
+  void ClassroomOfStudents::remove_failed()
+  {
+    btree->removeif(is_failed);
   }
 
   std::ostream& operator<<(std::ostream& out, const ClassroomOfStudents& classroom)

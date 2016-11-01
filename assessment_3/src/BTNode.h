@@ -1,7 +1,7 @@
 /**
 
-SENG1120 Assignment 1
-Created by Alex McClung
+SENG1120 Assignment 3
+Created by Alex McClung, 3256853
 Semester 2 2016
 
 **/
@@ -19,56 +19,126 @@ namespace alex_m
     {
     public:
 
-        // Constructor
-        // Precondition: None
-        // Postcondition: A new node instance is created
-        // @initial_data: Initial data to be stored in the node. Default Empty Object
-        // @initial_prev_link: Initial pointer to the previous node in the tree. Default NULL
-        // @initial_next_link: Initial pointer to the next node in the tree. Default NULL
+        /**
+         * @brief      { function_description }
+         *
+         * @param[in]  initial_data  The initial data
+         */
         BTNode(const Object& initial_data = Object());
-        // BTNode(const Object& initial_data = Object(), BTNode* initial_prev_link = NULL, BTNode* initial_next_link = NULL);
 
-        // Destructor
-        // Precondition: None
-        // Postcondition: The node instance is deleted
-        ~BTNode();
+        /**
+         * @brief      Destroys the object.
+         */
+        ~BTNode();        
 
-        // Precondition: None
-        // Postcondition: The data stored within the node is set to @param new_data
+        /**
+         * @brief      
+         *  Precondition: None
+         *  Postcondition: The data stored within the node is set
+         *
+         * @param[in]  new_data  The new data
+         */
         void set_data(const Object& new_data);
-
-        // Precondition: None
-        // Postcondition: The next_link pointer is set to @param new_link
+    
+        /**
+         * @brief      
+         *  Precondition: None
+         *  Postcondition: The pointer to the right child is set
+         *
+         * @param      new_link  The new link
+         */
         void set_left(BTNode* new_link);
 
-        // Precondition: None
-        // Postcondition: The prev_link pointer is set to @param new_link
+        /**
+         * @brief      Sets the right.
+         *
+         * @param      new_link  The new link
+         */
         void set_right(BTNode* new_link);
 
+        /**
+         * @brief      Sets the parent.
+         *
+         * @param      new_link  The new link
+         */
         void set_parent(BTNode* new_link);
 
-        //Data stored in the node
+        /**
+         * @brief      { function_description }
+         *
+         * @return     Data stored in the node
+         */
         Object data() const;
 
-        //Points to the next node in the tree
+        /**
+         * @brief      { function_description }
+         *
+         * @return     The left child node in the tree
+         */
         BTNode* left() const;
 
-        //Points to the previous node in the tree
+        /**
+         * @brief      { function_description }
+         *
+         * @return     The left child node in the tree
+         */
         BTNode* right() const;
 
-        //Points to the parent node in the tree
+        /**
+         * @brief      { function_description }
+         *
+         * @return     The parent node in the tree
+         */
         BTNode* parent() const;
 
+        /**
+         * @brief      Determines if leaf.
+         *
+         * @return     True if leaf, False otherwise.
+         */
         bool is_leaf() const;
+        
+        /**
+         * @brief      Determines if it has single child.
+         *
+         * @return     True if has single child, False otherwise.
+         */
         bool has_single_child() const;
+        
+        /**
+         * @brief      Determines if left child.
+         *
+         * @return     True if left child, False otherwise.
+         */
         bool is_left_child() const;
+        
+        /**
+         * @brief      Determines if right child.
+         *
+         * @return     True if right child, False otherwise.
+         */
         bool is_right_child() const;
 
     private:
+        
+        /**
+         * { item_description }
+         */
         Object d;
 
+        /**
+         * { item_description }
+         */
         BTNode* left_;
+        
+        /**
+         * { item_description }
+         */
         BTNode* right_;
+        
+        /**
+         * { item_description }
+         */
         BTNode* parent_;
     };
 }
