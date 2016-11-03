@@ -26,7 +26,7 @@ template <typename Object>
 BTree<Object>::~BTree()
 {
   //Clear the entire tree
-  tree_clear();
+  remove_all();
 }
 
 template <typename Object>
@@ -43,7 +43,7 @@ Object BTree<Object>::get_current() const
 }
 
 template <typename Object>
-void BTree<Object>::set_current(const Object& entry)
+void BTree<Object>::set_current(const Object& entry) const
 {
   //Set the value of the current ptr
   current_ptr->set_data(entry);
@@ -60,6 +60,13 @@ template <typename Object>
 template <typename Predicate>
 void BTree<Object>::removeif(BTNode<Object>* node, Predicate p)
 {
+
+  //Recursively traverses the tree postorder
+  //Calls the "predicate" function with the an Object (template type) as parameter
+  
+  //If the result of the evaluating the predicate function on this object is true
+  //Then the node is removed from the tree
+
   if (node != NULL)
   {
 
@@ -71,8 +78,29 @@ void BTree<Object>::removeif(BTNode<Object>* node, Predicate p)
 }
 
 template <typename Object>
+void BTree<Object>::remove_all()
+{
+  //Delete all nodes in the tree by traversing the entire tree
+  remove_all(root_);
+}
+
+template <typename Object>
+void BTree<Object>::remove_all(BTNode<Object>* node)
+{
+  //Delete all nodes in the tree by traversing the entire tree
+  if (node != NULL)
+  {
+    remove_all(node->left());
+    remove_all(node->right());
+    remove(node);
+  }
+}
+
+template <typename Object>
 bool BTree<Object>::remove(BTNode<Object>* node_to_remove)
 {
+
+  //Remove Algorithm as per lab 10 (without comparision at begining)
 
   if (node_to_remove == NULL) { return false; }
 
@@ -150,7 +178,7 @@ bool BTree<Object>::remove(BTNode<Object>* node_to_remove)
 }
 
 template <typename Object>
-BTNode<Object>* BTree<Object>::find_min(BTNode<Object>* node)
+BTNode<Object>* BTree<Object>::find_min(BTNode<Object>* node) const
 {
   if (node->right() != NULL) { return find_min(node->right()); }
   else { return node; }
@@ -194,13 +222,13 @@ void BTree<Object>::tree_insert(const Object& entry)
 }
 
 template <typename Object>
-std::string BTree<Object>::toString()
+std::string BTree<Object>::toString() const
 {
   return toString(root_, 0);
 }
 
 template <typename Object>
-std::string BTree<Object>::toString(BTNode<Object>* node, size_t level)
+std::string BTree<Object>::toString(BTNode<Object>* node, size_t level) const
 {
   std::string str = "";
   if (node != NULL)
@@ -218,14 +246,14 @@ std::string BTree<Object>::toString(BTNode<Object>* node, size_t level)
 }
 
 template <typename Object>
-size_t BTree<Object>::countInRange(int low, int high)
+size_t BTree<Object>::countInRange(int low, int high) const
 {
   return countInRange(root_, low, high);
 }
 
 // Returns count of nodes in BST in range [low, high]
 template <typename Object>
-size_t BTree<Object>::countInRange(BTNode<Object>* node, int low, int high)
+size_t BTree<Object>::countInRange(BTNode<Object>* node, int low, int high) const
 {
   int count = 0;
 
@@ -244,21 +272,15 @@ bool BTree<Object>::empty() const
   return (root_ == NULL);
 }
 
-template <typename Object>
-void BTree<Object>::tree_clear()
-{
-  //Delete all nodes in the tree by traversing the entire tree
-  //removeif(root_, )
-}
 
 template <typename Object>
-std::string BTree<Object>::inOrder()
+std::string BTree<Object>::inOrder() const
 {
   return inOrder(root_);
 }
 
 template <typename Object>
-std::string BTree<Object>::inOrder(BTNode<Object>* node)
+std::string BTree<Object>::inOrder(BTNode<Object>* node) const
 {
   std::string printed;
 
@@ -272,14 +294,15 @@ std::string BTree<Object>::inOrder(BTNode<Object>* node)
   return printed;
 }
 
+// Average should be moved to ClassroomOfStudents to make a generic tree class
 template <typename Object>
-float BTree<Object>::average()
+float BTree<Object>::average() const
 {
   return average(root_) / tree_count();
 }
 
 template <typename Object>
-float BTree<Object>::average(BTNode<Object>* node)
+float BTree<Object>::average(BTNode<Object>* node) const
 {
   float average_sum = 0;
 
@@ -293,7 +316,7 @@ float BTree<Object>::average(BTNode<Object>* node)
 }
 
 template <typename Object>
-void BTree<Object>::add(BTNode<Object>* node, Object it)
+void BTree<Object>::add(BTNode<Object>* node, Object it) const
 {
   int relation = it.compare_to(node->data());
 

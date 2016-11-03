@@ -71,7 +71,7 @@ namespace alex_m
          *
          * @return     True if grade in range, False otherwise.
          */
-        bool is_grade_in_range(float low_threshold, float high_threshold);
+        bool is_grade_in_range(float low_threshold, float high_threshold) const;
 
         /**
          * @brief      { function_description }

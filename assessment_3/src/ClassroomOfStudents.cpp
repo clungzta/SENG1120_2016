@@ -39,7 +39,7 @@ namespace alex_m
 
   void ClassroomOfStudents::shuffle_names()
   {
-  // Yates Shuffle Algorithm
+  // Yates Shuffle Algorithm (From assignment 1)
   // -- To shuffle an array a of n elements (indices 0..n-1):
   // for i from n−1 downto 1 do
   //  j ← random integer such that 0 ≤ j ≤ i
@@ -57,23 +57,23 @@ namespace alex_m
 
         // exchange a[j] and a[i]
         std::list<std::string>::iterator it;
-
         it = names.begin();
         auto i_ptr = std::next(it, i);
         it = names.begin();
         auto j_ptr = std::next(it, j);
+        // Maybe using std::vector would've been a better idea...
 
         std::iter_swap(i_ptr, j_ptr);
       }
     }
   }
 
-  float ClassroomOfStudents::get_average_grade()
+  float ClassroomOfStudents::get_average_grade() const
   {
     return btree->average();
   }
 
-  int ClassroomOfStudents::countHDs()
+  int ClassroomOfStudents::countHDs() const
   {
     return btree->countInRange(85,100);  
   }
@@ -83,13 +83,14 @@ namespace alex_m
     return btree->inOrder();
   }
 
-  //Non class member, used as a "predicate" for recursive remove from tree
-  bool is_failed(Student s)
+  // function passed in as a predicate for recursive remove from tree
+  // i.e. if the result of this function returns true for a Student: this student gets removed from the tree
+  bool is_failed(Student s) // Non class-member!
   {
     return s.is_grade_in_range(0,50);
   }
 
-  void ClassroomOfStudents::remove_failed()
+  void ClassroomOfStudents::remove_failed() const
   {
     btree->removeif(is_failed);
   }

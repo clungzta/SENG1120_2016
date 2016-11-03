@@ -12,6 +12,7 @@ Semester 2 2016
 
 namespace alex_m
 {
+
 Student::Student(const std::string& student_name = std::string(), const float& student_grade = 0)
 {
     name = student_name;
@@ -54,7 +55,7 @@ float Student::get_grade() const
     return grade;
 }
 
-bool Student::is_grade_in_range(float low_threshold, float high_threshold)
+bool Student::is_grade_in_range(float low_threshold, float high_threshold) const
 {
     return (grade > low_threshold && grade < high_threshold);
 }
@@ -83,19 +84,4 @@ float operator + (const float& other, const Student& student)
 {
     return other + student.get_grade();
 }
-
-// bool operator < (const Student& student1, const Student& student2)
-// {
-//     return student1.get_name() < student2.get_name();
-// }
-
-// bool operator > (const Student& student1, const Student& student2)
-// {
-//     return student1.get_name() > student2.get_name();
-// }
-
-// bool operator == (const Student& student1, const Student& student2)
-// {
-//     return student1.get_name() == student2.get_name();
-// }
 }

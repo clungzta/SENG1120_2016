@@ -23,21 +23,21 @@ namespace alex_m
 
         // Constructor
         /**
-         * @brief      { function_description }
+         * @brief      Constructor for binary tree.
          */
         BTree();
 
         // Destructor
         /**
-         * @brief      Destroys the object.
+         * @brief      Destroys the binary tree object.
          */
         ~BTree();
 
 
         /**
-         * @brief      { function_description }
+         * @brief      Function returning the number of nodes stored in the tree
          *
-         * @return     { description_of_the_return_value }
+         * @return     The number of nodes stored in the tree
          */
         size_t tree_count() const;
 
@@ -52,18 +52,18 @@ namespace alex_m
         Object get_current() const;
         
         /**
-         * @brief      Sets the current.
+         * @brief      Sets the Object stored at current.
          *
-         * @param[in]  entry  The entry
+         * @param[in]  entry  The entry to set current to
          */
-        void set_current(const Object& entry);
+        void set_current(const Object& entry) const;
 
 
         // Insert
         /**
-         * @brief      { function_description }
+         * @brief      Insert an entry into the tree
          *
-         * @param[in]  entry  The entry
+         * @param[in]  entry  The entry to insert into the tree
          */
         void tree_insert(const Object& entry);
 
@@ -71,27 +71,22 @@ namespace alex_m
 
         // Remove
         /**
-         * @brief      { function_description }
+         * @brief      Remove an node from the tree
          *
-         * @param      node_to_remove  The node to remove
+         * @param      node_to_remove  Pointer to the node to remove which will removed
          *
-         * @return     { description_of_the_return_value }
+         * @return     True if this node was successfully removed from the tree
          */
         bool remove(BTNode<Object>* node_to_remove);
 
-
-        
-        // Tree Navigation
-
         /**
-         * @brief [brief description]
-         * @details [long description]
-         * @return [description]
+         * @brief Moves the cursor to the root node
+         * @return True if the root node is not NULL
          */
         bool goto_root();
         
         /**
-         * @brief [brief description]
+         * @brief Moves the cursor to the left child node
          * @details [long description]
          * @return [description]
          */
@@ -114,31 +109,32 @@ namespace alex_m
         /**
          * @brief [brief description]
          * @details [long description]
-         * @return [description]
+         * @return true if the tree is empty
          */
         bool empty() const;
 
         /**
          * @brief      { function_description }
          */
-        void tree_clear(); // TO-DO: fix this function!
+        void remove_all();
 
         /**
          * @brief      { function_description }
          *
          * @return     { description_of_the_return_value }
          */
-        std::string inOrder(); // Make generic with function ptr?
+        std::string inOrder() const; // Make generic with function ptr?
         
         /**
          * @brief      Returns a string representation of the object.
          *
          * @return     String representation of the object.
          */
-        std::string toString();
+        std::string toString() const;
 
 
-        // These should be moved to ClassroomOfStudents to make a generic tree class...
+        // Functions below should be moved to ClassroomOfStudents to make a generic tree class...
+        // Nevermind... Marking criteria allows us to use tree class
         
         /**
          * @brief      Counts the number of in range.
@@ -148,14 +144,14 @@ namespace alex_m
          *
          * @return     Number of in range.
          */
-        size_t countInRange(int low, int high);
+        size_t countInRange(int low, int high) const;
 
         /**
          * @brief      { function_description }
          *
          * @return     { description_of_the_return_value }
          */
-        float average();
+        float average() const;
 
         /**
          * @brief      { function_description }
@@ -185,8 +181,6 @@ namespace alex_m
          */
         size_t size;
 
-        //Helper Functions
-
         /**
          * @brief      { function_description }
          *
@@ -199,12 +193,19 @@ namespace alex_m
         void removeif(BTNode<Object>* node, Predicate p);
 
         /**
+         * @brief      Removes all.
+         *
+         * @param      node  The node
+         */
+        void remove_all(BTNode<Object>* node);        
+
+        /**
          * @brief      { function_description }
          *
          * @param      node  The node
          * @param[in]  it    The iterator
          */
-        void add(BTNode<Object>* node, Object it);
+        void add(BTNode<Object>* node, Object it) const;
         
         /**
          * @brief      { function_description }
@@ -213,7 +214,7 @@ namespace alex_m
          *
          * @return     { description_of_the_return_value }
          */
-        BTNode<Object>* find_min(BTNode<Object>* node); 
+        BTNode<Object>* find_min(BTNode<Object>* node) const; 
         
         /**
          * @brief      { function_description }
@@ -223,7 +224,7 @@ namespace alex_m
          *
          * @return     { description_of_the_return_value }
          */
-        std::string toString(BTNode<Object>* node, size_t level);
+        std::string toString(BTNode<Object>* node, size_t level) const;
         
         /**
          * @brief      { function_description }
@@ -232,7 +233,7 @@ namespace alex_m
          *
          * @return     { description_of_the_return_value }
          */
-        std::string inOrder(BTNode<Object>* node);
+        std::string inOrder(BTNode<Object>* node) const;
 
         // The below functions should be moved to ClassroomOfStudents to make a generic tree class... 
         /**
@@ -242,7 +243,7 @@ namespace alex_m
          *
          * @return     { description_of_the_return_value }
          */
-        float average(BTNode<Object>* node);
+        float average(BTNode<Object>* node) const;
         
         /**
          * @brief      Counts the number of in range.
@@ -253,8 +254,8 @@ namespace alex_m
          *
          * @return     Number of in range.
          */
-        size_t countInRange(BTNode<Object>* node, int low, int high);
-	};
-}	
+        size_t countInRange(BTNode<Object>* node, int low, int high) const;
+    };
+}   
 #include "BTree.template"
 #endif

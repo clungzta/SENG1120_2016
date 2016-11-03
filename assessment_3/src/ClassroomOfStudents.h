@@ -45,19 +45,19 @@ namespace alex_m
        *
        * @return     The average grade.
        */
-      float get_average_grade();
+      float get_average_grade() const;
 
       /**
        * @brief      Removes a failed.
        */
-      void remove_failed();
+      void remove_failed() const;
 
       /**
        * @brief      Counts the number of High Distinction Grades.
        *
        * @return     Number of High Distinction Grades.
        */
-      int countHDs();
+      int countHDs() const;
     
     private:
       
@@ -67,8 +67,6 @@ namespace alex_m
        *  Postcondition: The positions of these cards are randomized using the yates shuffle algorithm
        */
       void shuffle_names();
-
-      //
       
       /**
        * Std List to contain the student names prior to placing in tree
