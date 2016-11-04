@@ -55,9 +55,9 @@ float Student::get_grade() const
     return grade;
 }
 
-bool Student::is_grade_in_range(float low_threshold, float high_threshold) const
+bool Student::is_grade_in_range(float low, float high) const
 {
-    return (grade > low_threshold && grade < high_threshold);
+    return (grade > low && grade < high);
 }
 
 int Student::compare_to(const Student& another_student) const
@@ -80,8 +80,8 @@ std::string operator + (const std::string& other, const Student& student)
     return other + " (" + student.get_name() + ", " + std::to_string(student.get_grade()) + ")";
 }
 
-float operator + (const float& other, const Student& student)
+float operator + (const float& other_grade, const Student& student)
 {
-    return other + student.get_grade();
+    return other_grade + student.get_grade();
 }
 }

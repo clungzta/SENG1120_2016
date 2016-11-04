@@ -18,41 +18,66 @@ namespace alex_m
     public:
 
         /**
-         * @brief      { function_description }
+         * @brief      Student constructor
+         * 
+         * @details
+         * Precondition: None
+         * Postcondition: Student object is initialised
          */
         Student();
 
         /**
-         * @brief      { function_description }
+         * @brief      Alternate Student constructor (with name and grade parameters)
          *
-         * @param[in]  student_name   The student name
-         * @param[in]  student_grade  The student grade
+         * @details
+         * Precondition: None
+         * Postcondition: Student object is initialised
+         *
+         * @param[in]  student_name   The name of the student
+         * @param[in]  student_grade  The grade attained by the student
          */
         Student(const std::string& student_name, const float& student_grade);
 
         /**
-         * @brief      { function_description }
+         * @brief      Student Constructor (copy of another student)
          *
-         * @param[in]  s     { parameter_description }
+         * @details
+         * Precondition: A student object is initialised
+         * Postcondition: A copy of this Student object is initialised
+         *
+         * @param[in]  s     A student object to be copied
          */
         Student(const Student& s);
 
         /**
-         * @brief      Destroys the object.
+         * @brief      Destroys the Student object.
+         * 
+         * @details
+         * Precondition: None
+         * Postcondition: This student object is destroyed
+         * 
          */
         ~Student();
         
         /**
-         * @brief      Sets the name.
+         * @brief      Sets the name of the student.
+         * 
+         * @details
+         * Precondition: None
+         * Postcondition: Student name is set to new_name
          *
-         * @param[in]  new_name  The new name
+         * @param[in]  new_name  The new name of the student
          */
         void set_name(const std::string new_name);
 
         /**
-         * @brief      Sets the grade.
+         * @brief      Sets the grade of the Student.
+         * 
+         * @details
+         * Precondition: None
+         * Postcondition: Student grade is set to new_grade
          *
-         * @param[in]  new_grade  The new grade
+         * @param[in]  new_grade  The new grade of the student
          */
         void set_grade(const float new_grade);
 
@@ -64,96 +89,62 @@ namespace alex_m
         float get_grade() const;
 
         /**
-         * @brief      Determines if grade in range.
+         * @brief      Determines if the Student's grade falls within the range [low,high].
          *
-         * @param[in]  low_threshold   The low threshold
-         * @param[in]  high_threshold  The high threshold
+         * @param[in]  low   The low threshold
+         * @param[in]  high  The high threshold
          *
-         * @return     True if grade in range, False otherwise.
+         * @return     True if grade in range [low, high], False otherwise.
          */
-        bool is_grade_in_range(float low_threshold, float high_threshold) const;
+        bool is_grade_in_range(float low, float high) const;
 
         /**
-         * @brief      { function_description }
+         * @brief      Compares this Student object with another Student object
+         * 
+         * @details
+         * Precondition: Another Student Object is initialised
+         * Postcondition: This Student Object is compared the other student Object
          *
-         * @param[in]  another_student  Another student
+         * @param[in]  another_student  Student to compare with.
          *
-         * @return     { description_of_the_return_value }
+         * @return     -1: if this student's name comes before another_students name alphabetically, 
+         * 0: if the names are the same, 
+         * 1: if another_student name comes before this students name alpabetically
          */
         int compare_to(const Student& another_student) const;
 
         /**
-         * @brief      Gets the name.
+         * @brief      Gets the name of the Student.
          *
-         * @return     The name.
+         * @return     Returns the name of the Student.
          */
         std::string get_name() const;
 
     private:
         /**
-         * { item_description }
+         * The name of the student
          */
         std::string name;
         
         /**
-         * { item_description }
+         * The grade attained by the student
          */
         float grade;
     };
 
   /**
-   * @brief      { operator_description }
-   *
-   * @param      out      The out
-   * @param[in]  student  The student
-   *
-   * @return     { description_of_the_return_value }
+   * @brief      Overloaded cout operator for Student object
    */
   std::ostream& operator << (std::ostream& out, const Student& student);
   
   /**
-   * @brief      { operator_description }
-   *
-   * @param[in]  other    The other
-   * @param[in]  student  The student
-   *
-   * @return     { description_of_the_return_value }
+   * @brief      Overloaded plus operator for Student object with another Student
    */
   std::string operator + (const std::string& other, const Student& student);
   
   /**
-   * @brief      { operator_description }
-   *
-   * @param[in]  other    The other
-   * @param[in]  student  The student
-   *
-   * @return     { description_of_the_return_value }
+   * @brief      Overloaded plus operator for Student object with a float grade
    */
-  float operator + (const float& other, const Student& student);
-  
-  /**
-   * @brief      { operator_description }
-   *
-   * @param[in]  student1  The student 1
-   * @param[in]  student2  The student 2
-   *
-   * @return     { description_of_the_return_value }
-   */
-  bool operator < (const Student& student1, const Student& student2);
-  
-  /**
-   * { item_description }
-   */
-  bool operator > (const Student& student1, const Student& student2);
-  
-  /**
-   * @brief      { operator_description }
-   *
-   * @param[in]  student1  The student 1
-   * @param[in]  student2  The student 2
-   *
-   * @return     { description_of_the_return_value }
-   */
-  bool operator == (const Student& student1, const Student& student2);
+  float operator + (const float& other_grade, const Student& student);
 }
 #endif

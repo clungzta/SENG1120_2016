@@ -63,9 +63,6 @@ void BTree<Object>::removeif(BTNode<Object>* node, Predicate p)
 
   //Recursively traverses the tree postorder
   //Calls the "predicate" function with the an Object (template type) as parameter
-  
-  //If the result of the evaluating the predicate function on this object is true
-  //Then the node is removed from the tree
 
   if (node != NULL)
   {
@@ -73,6 +70,8 @@ void BTree<Object>::removeif(BTNode<Object>* node, Predicate p)
     removeif(node->left(), p);
     removeif(node->right(), p);
 
+    // If the result of the evaluating the predicate function on the
+    // Object stored in node is true: then the node is removed from the tree
     if (p(node->data())) { remove(node); }
   }
 }
@@ -100,7 +99,7 @@ template <typename Object>
 bool BTree<Object>::remove(BTNode<Object>* node_to_remove)
 {
 
-  //Remove Algorithm as per lab 10 (without comparision at begining)
+  //Modified Remove Algorithm from lab 10 (without the comparision at begining)
 
   if (node_to_remove == NULL) { return false; }
 

@@ -17,11 +17,11 @@ namespace alex_m
 
   ClassroomOfStudents::ClassroomOfStudents(std::list<std::string>& student_names)
   {  
-    names = student_names;
-    shuffle_names();
+    std::list<std::string> names = shuffle_names(student_names);
 
     btree = new BTree<Student>();
 
+    //Create a binary tree by iterating over the (shuffled) list of students
     std::list<std::string>::const_iterator student_name_iterator;
     for (student_name_iterator = names.begin(); student_name_iterator != names.end(); ++student_name_iterator)
     {
@@ -37,9 +37,10 @@ namespace alex_m
     delete btree;
   }
 
-  void ClassroomOfStudents::shuffle_names()
+  std::list<std::string> ClassroomOfStudents::shuffle_names(std::list<std::string> names)
   {
   // Yates Shuffle Algorithm (From assignment 1)
+  // Adapted to use std::list
   // -- To shuffle an array a of n elements (indices 0..n-1):
   // for i from n−1 downto 1 do
   //  j ← random integer such that 0 ≤ j ≤ i
@@ -61,11 +62,12 @@ namespace alex_m
         auto i_ptr = std::next(it, i);
         it = names.begin();
         auto j_ptr = std::next(it, j);
-        // Maybe using std::vector would've been a better idea...
+        // Maybe using std::vector would've been a better idea for this...
 
         std::iter_swap(i_ptr, j_ptr);
       }
     }
+    return names;
   }
 
   float ClassroomOfStudents::get_average_grade() const
@@ -83,16 +85,15 @@ namespace alex_m
     return btree->inOrder();
   }
 
-  // function passed in as a predicate for recursive remove from tree
-  // i.e. if the result of this function returns true for a Student: this student gets removed from the tree
-  bool is_failed(Student s) // Non class-member!
+  // function passed in as a predicate, for recursive remove from tree
+  bool is_failed(Student s) // Non class member!
   {
     return s.is_grade_in_range(0,50);
   }
 
   void ClassroomOfStudents::remove_failed() const
   {
-    btree->removeif(is_failed);
+    btree->removeif(is_failed); // Predicate function as argument
   }
 
   std::ostream& operator<<(std::ostream& out, const ClassroomOfStudents& classroom)

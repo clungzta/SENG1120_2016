@@ -35,13 +35,22 @@ int main(int argc, char* argv[]) {
      "Madison", "Magdalena", "Marcus", "Mark", "Melanie", "Min", "Mitchell", "Nicholas", "Ryan", "Sang", "Shane", "Simon",
      "Thomas", "Timothy", "Trent", "Troy", "Zaanif" };
 
-    ClassroomOfStudents* classroom = new ClassroomOfStudents(student_names);
-    cout << *classroom << endl;    
-    cout << endl << "HDs: " << classroom->countHDs() << endl;
-    cout << "Average: " << classroom->get_average_grade() << endl;
 
+    ClassroomOfStudents* classroom = new ClassroomOfStudents(student_names);
+
+    //Step 3 - Print out all names and grades using the inorder traversal
+    cout << *classroom << endl;    
+    
+    //Step 4 - Print out how many students had a grade ≥ 85, by recursively traversing the tree
+    cout << endl << "HDs: " << classroom->countHDs() << endl;
+    
+    //Step 5 - Print out the average of the class, by recursively traversing the tree
+    cout << "Average: " << classroom->get_average_grade() << endl;
+    
+    //Step 6 - Delete all students who had a grade < 50
     classroom->remove_failed();
 
+    //Step 7 - Redo steps 3, 4 and 5 with the new tree
     cout << endl << *classroom << endl;
     cout << endl << "HDs: " << classroom->countHDs() << endl;
     cout << "Average: " << classroom->get_average_grade() << endl;
