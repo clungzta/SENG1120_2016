@@ -77,7 +77,10 @@ std::ostream& operator<<(std::ostream& out, const Student& student)
 
 std::string operator + (const std::string& other, const Student& student)
 {
-    return other + " (" + student.get_name() + ", " + std::to_string(student.get_grade()) + ")";
+    std::stringstream stream;
+    stream << student.get_grade();
+
+    return other + " (" + student.get_name() + ", " + stream.str() + ")";
 }
 
 float operator + (const float& other_grade, const Student& student)

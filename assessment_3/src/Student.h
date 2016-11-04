@@ -10,6 +10,7 @@ Semester 2 2016
 #define Student_H
 
 #include <string>
+#include <sstream>
 
 namespace alex_m
 {
